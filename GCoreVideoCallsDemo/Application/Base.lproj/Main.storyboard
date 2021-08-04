@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="loe-Ai-peX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main-->
+        <scene sceneID="C7c-a9-U58">
+            <objects>
+                <viewController title="Main" id="loe-Ai-peX" customClass="ViewController" customModule="GCoreLabMeetDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QPu-Xd-HTA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="NWd-2J-VMw" customClass="RTCEAGLVideoView">
+                                <rect key="frame" x="0.0" y="44" width="187.5" height="250"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="0UY-dh-JKt"/>
+                                    <constraint firstAttribute="width" secondItem="NWd-2J-VMw" secondAttribute="height" multiplier="3:4" id="vLU-AE-DC9"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keP-T3-Y0x">
+                                <rect key="frame" x="8" y="807" width="113" height="30"/>
+                                <state key="normal" title="togle local audio">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTogleAudio:" destination="loe-Ai-peX" eventType="touchUpInside" id="H4Y-4L-QVm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jzS-gz-v6F">
+                                <rect key="frame" x="8" y="767" width="112" height="30"/>
+                                <state key="normal" title="togle local video">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTogleVideo:" destination="loe-Ai-peX" eventType="touchUpInside" id="I48-Sa-DbU"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="73M-yy-pk7">
+                                <rect key="frame" x="16" y="323.5" width="382" height="249"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xA2-HJ-Jvz" customClass="RTCEAGLVideoView">
+                                        <rect key="frame" x="0.0" y="0.0" width="187" height="249"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="xA2-HJ-Jvz" secondAttribute="height" multiplier="3:4" id="Bmv-9A-sno"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcD-0a-1XV" customClass="RTCEAGLVideoView">
+                                        <rect key="frame" x="195" y="0.0" width="187" height="249"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="XcD-0a-1XV" secondAttribute="height" multiplier="3:4" id="Jpr-JZ-oAw"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="xA2-HJ-Jvz" firstAttribute="width" secondItem="xA2-HJ-Jvz" secondAttribute="height" multiplier="3:4" id="Ami-f6-BQ6"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="92w-kC-d33"/>
+                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                        <constraints>
+                            <constraint firstItem="92w-kC-d33" firstAttribute="trailing" secondItem="73M-yy-pk7" secondAttribute="trailing" constant="16" id="2G0-5P-EKu"/>
+                            <constraint firstItem="NWd-2J-VMw" firstAttribute="top" secondItem="92w-kC-d33" secondAttribute="top" id="4Hx-mE-3bT"/>
+                            <constraint firstItem="92w-kC-d33" firstAttribute="bottom" secondItem="keP-T3-Y0x" secondAttribute="bottom" constant="25" id="FSS-ta-XlF"/>
+                            <constraint firstItem="73M-yy-pk7" firstAttribute="centerY" secondItem="QPu-Xd-HTA" secondAttribute="centerY" id="Jf9-Pd-IgB"/>
+                            <constraint firstItem="73M-yy-pk7" firstAttribute="centerX" secondItem="QPu-Xd-HTA" secondAttribute="centerX" id="LCe-NG-fNx"/>
+                            <constraint firstItem="keP-T3-Y0x" firstAttribute="leading" secondItem="92w-kC-d33" secondAttribute="leading" constant="8" id="M12-EU-VaD"/>
+                            <constraint firstItem="keP-T3-Y0x" firstAttribute="top" secondItem="jzS-gz-v6F" secondAttribute="bottom" constant="10" id="c21-va-jf4"/>
+                            <constraint firstItem="73M-yy-pk7" firstAttribute="leading" secondItem="92w-kC-d33" secondAttribute="leading" constant="16" id="ix2-St-4rk"/>
+                            <constraint firstItem="jzS-gz-v6F" firstAttribute="leading" secondItem="92w-kC-d33" secondAttribute="leading" constant="8" id="l6P-Yo-6yo"/>
+                            <constraint firstItem="NWd-2J-VMw" firstAttribute="leading" secondItem="92w-kC-d33" secondAttribute="leading" id="r4D-HY-jQH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="localVideoView" destination="NWd-2J-VMw" id="STc-a0-aJd"/>
+                        <outlet property="remoteVideoView" destination="xA2-HJ-Jvz" id="nWN-1w-C4e"/>
+                        <outlet property="remoteVideoView2" destination="XcD-0a-1XV" id="iHl-81-HGv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ted-88-hvm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.23188405797103" y="128.57142857142856"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

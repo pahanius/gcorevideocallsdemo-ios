@@ -1,0 +1,28 @@
+PODS:
+  - mediasoup_ios_client (1.5.3)
+  - PinLayout (1.10.0)
+  - Starscream (4.0.4)
+  - SwiftyJSON (4.3.0)
+
+DEPENDENCIES:
+  - mediasoup_ios_client (= 1.5.3)
+  - PinLayout
+  - Starscream (~> 4.0.4)
+  - SwiftyJSON (~> 4.0)
+
+SPEC REPOS:
+  trunk:
+    - mediasoup_ios_client
+    - PinLayout
+    - Starscream
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  mediasoup_ios_client: 100b82dc6a47dd72c9bc1897c9b8159de0b457a1
+  PinLayout: e50e9a748b632905fca6e67043ea4b05d6c92186
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+
+PODFILE CHECKSUM: 3ac26f14ffacec221b5d02d57bb99d5c322cf3ba
+
+COCOAPODS: 1.10.2

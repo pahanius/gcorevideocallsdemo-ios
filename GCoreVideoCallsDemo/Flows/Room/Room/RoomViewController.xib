@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RoomViewController" customModule="GCoreLabMeetDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="audioSelectionButtonView" destination="zXw-k8-kjm" id="YvD-ag-XJr"/>
+                <outlet property="closeButton" destination="S8b-vC-jrH" id="Dwe-Xq-IbF"/>
+                <outlet property="localNameLabel" destination="QQc-iN-9nV" id="ZkF-N3-1Sf"/>
+                <outlet property="localVideoAspectRationConstraint" destination="sh6-Dy-SSF" id="lJx-39-Kpu"/>
+                <outlet property="localVideoView" destination="wse-yL-6kd" id="C9U-s1-mOT"/>
+                <outlet property="mainScrollView" destination="k4r-8g-n9O" id="swv-OJ-HwZ"/>
+                <outlet property="switchCameraSelectionButtonView" destination="OVP-V3-VBW" id="c8A-Ty-NCb"/>
+                <outlet property="switchStackView" destination="MzD-1S-MDf" id="Mar-xG-Bjd"/>
+                <outlet property="videoSelectionButtonView" destination="1WX-fN-cuj" id="dqv-Xv-NXE"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k4r-8g-n9O">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wse-yL-6kd" customClass="RTCEAGLVideoView">
+                    <rect key="frame" x="298" y="60" width="100" height="133.5"/>
+                    <color key="backgroundColor" systemColor="systemTealColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="LVZ-6j-Bdc"/>
+                        <constraint firstAttribute="width" secondItem="wse-yL-6kd" secondAttribute="height" multiplier="3:4" id="sh6-Dy-SSF"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQc-iN-9nV">
+                    <rect key="frame" x="332.5" y="171" width="31" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8b-vC-jrH">
+                    <rect key="frame" x="16" y="60" width="44" height="44"/>
+                    <color key="backgroundColor" red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="OfQ-gT-uyc"/>
+                        <constraint firstAttribute="height" constant="44" id="Swp-Kh-GFX"/>
+                    </constraints>
+                    <state key="normal" title="X"/>
+                    <connections>
+                        <action selector="onClose:" destination="-1" eventType="touchUpInside" id="3t1-y4-BuT"/>
+                    </connections>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="MzD-1S-MDf">
+                    <rect key="frame" x="16" y="794" width="382" height="52"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LmC-2o-0re">
+                            <rect key="frame" x="0.0" y="0.0" width="127.5" height="52"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXw-k8-kjm" customClass="SelectionButtonView" customModule="GCoreLabMeetDemo" customModuleProvider="target">
+                                    <rect key="frame" x="37.5" y="0.0" width="52" height="52"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="52" id="C35-xC-X6x"/>
+                                        <constraint firstAttribute="width" constant="52" id="eyH-0p-WeB"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="zXw-k8-kjm" firstAttribute="centerX" secondItem="LmC-2o-0re" secondAttribute="centerX" id="2YX-3h-aTr"/>
+                                <constraint firstItem="zXw-k8-kjm" firstAttribute="top" secondItem="LmC-2o-0re" secondAttribute="top" id="Lxz-jh-JPw"/>
+                                <constraint firstItem="zXw-k8-kjm" firstAttribute="centerY" secondItem="LmC-2o-0re" secondAttribute="centerY" id="N9m-QY-454"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IY2-mT-Q7s">
+                            <rect key="frame" x="127.5" y="0.0" width="127" height="52"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1WX-fN-cuj" customClass="SelectionButtonView" customModule="GCoreLabMeetDemo" customModuleProvider="target">
+                                    <rect key="frame" x="37.5" y="0.0" width="52" height="52"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="52" id="hzh-Fg-eqA"/>
+                                        <constraint firstAttribute="height" constant="52" id="wBm-iQ-mAg"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="1WX-fN-cuj" firstAttribute="centerX" secondItem="IY2-mT-Q7s" secondAttribute="centerX" id="Bfh-d2-RnU"/>
+                                <constraint firstItem="1WX-fN-cuj" firstAttribute="centerY" secondItem="IY2-mT-Q7s" secondAttribute="centerY" id="gN2-nN-6pp"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCQ-dJ-wps">
+                            <rect key="frame" x="254.5" y="0.0" width="127.5" height="52"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVP-V3-VBW" customClass="SelectionButtonView" customModule="GCoreLabMeetDemo" customModuleProvider="target">
+                                    <rect key="frame" x="38" y="0.0" width="52" height="52"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="52" id="0VR-Ca-hZk"/>
+                                        <constraint firstAttribute="width" constant="52" id="825-vz-JV0"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="OVP-V3-VBW" firstAttribute="centerX" secondItem="wCQ-dJ-wps" secondAttribute="centerX" id="FHV-nr-PbS"/>
+                                <constraint firstItem="OVP-V3-VBW" firstAttribute="centerY" secondItem="wCQ-dJ-wps" secondAttribute="centerY" id="bbC-lX-Fw7"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="k4r-8g-n9O" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0Fn-bT-TUM"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MzD-1S-MDf" secondAttribute="trailing" constant="16" id="2cC-lW-97k"/>
+                <constraint firstItem="QQc-iN-9nV" firstAttribute="centerX" secondItem="wse-yL-6kd" secondAttribute="centerX" id="O0Y-ur-arR"/>
+                <constraint firstItem="k4r-8g-n9O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="O4m-2e-TGh"/>
+                <constraint firstAttribute="bottom" secondItem="k4r-8g-n9O" secondAttribute="bottom" id="TBJ-FH-St9"/>
+                <constraint firstItem="S8b-vC-jrH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="VaL-B5-WlF"/>
+                <constraint firstItem="wse-yL-6kd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="YvH-uq-5HC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wse-yL-6kd" secondAttribute="trailing" constant="16" id="a0Z-dZ-M9e"/>
+                <constraint firstItem="MzD-1S-MDf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="e0L-et-wo2"/>
+                <constraint firstItem="S8b-vC-jrH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="i8y-0X-jqW"/>
+                <constraint firstItem="k4r-8g-n9O" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="jIy-jX-wZQ"/>
+                <constraint firstItem="QQc-iN-9nV" firstAttribute="bottom" secondItem="wse-yL-6kd" secondAttribute="bottom" constant="-8" id="pTI-k6-B8k"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="MzD-1S-MDf" secondAttribute="bottom" constant="16" id="q6Y-QA-F3u"/>
+                <constraint firstItem="k4r-8g-n9O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vmK-uI-ap8"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="138.61607142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
