@@ -9,14 +9,19 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RoomViewController" customModule="GCoreLabMeetDemo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RoomViewController" customModule="GCoreVideoCallsDemo" customModuleProvider="target">
             <connections>
                 <outlet property="audioSelectionButtonView" destination="zXw-k8-kjm" id="YvD-ag-XJr"/>
                 <outlet property="closeButton" destination="S8b-vC-jrH" id="Dwe-Xq-IbF"/>
+                <outlet property="loaderBackView" destination="gXa-e3-zki" id="zU2-a5-F6c"/>
+                <outlet property="loaderView" destination="Zfk-cm-9Cj" id="LdS-kQ-HcN"/>
                 <outlet property="localNameLabel" destination="QQc-iN-9nV" id="ZkF-N3-1Sf"/>
                 <outlet property="localVideoAspectRationConstraint" destination="sh6-Dy-SSF" id="lJx-39-Kpu"/>
                 <outlet property="localVideoView" destination="wse-yL-6kd" id="C9U-s1-mOT"/>
+                <outlet property="loggerView" destination="lk9-BZ-fft" id="DfN-rL-PGT"/>
                 <outlet property="mainScrollView" destination="k4r-8g-n9O" id="swv-OJ-HwZ"/>
+                <outlet property="roomName" destination="eQG-i1-eCO" id="Vxo-fK-q9c"/>
+                <outlet property="showLogButton" destination="DYv-8n-PIr" id="gMW-J2-2DB"/>
                 <outlet property="switchCameraSelectionButtonView" destination="OVP-V3-VBW" id="c8A-Ty-NCb"/>
                 <outlet property="switchStackView" destination="MzD-1S-MDf" id="Mar-xG-Bjd"/>
                 <outlet property="videoSelectionButtonView" destination="1WX-fN-cuj" id="dqv-Xv-NXE"/>
@@ -57,13 +62,24 @@
                         <action selector="onClose:" destination="-1" eventType="touchUpInside" id="3t1-y4-BuT"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lk9-BZ-fft" customClass="LoggerView" customModule="GCoreVideoCallsDemo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="120" width="414" height="658"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYv-8n-PIr">
+                    <rect key="frame" x="16" y="136" width="68" height="30"/>
+                    <state key="normal" title="Show Log"/>
+                    <connections>
+                        <action selector="onShowLog:" destination="-1" eventType="touchUpInside" id="BeS-lP-gij"/>
+                    </connections>
+                </button>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="MzD-1S-MDf">
                     <rect key="frame" x="16" y="794" width="382" height="52"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LmC-2o-0re">
                             <rect key="frame" x="0.0" y="0.0" width="127.5" height="52"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXw-k8-kjm" customClass="SelectionButtonView" customModule="GCoreLabMeetDemo" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXw-k8-kjm" customClass="SelectionButtonView" customModule="GCoreVideoCallsDemo" customModuleProvider="target">
                                     <rect key="frame" x="37.5" y="0.0" width="52" height="52"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
@@ -82,7 +98,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IY2-mT-Q7s">
                             <rect key="frame" x="127.5" y="0.0" width="127" height="52"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1WX-fN-cuj" customClass="SelectionButtonView" customModule="GCoreLabMeetDemo" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1WX-fN-cuj" customClass="SelectionButtonView" customModule="GCoreVideoCallsDemo" customModuleProvider="target">
                                     <rect key="frame" x="37.5" y="0.0" width="52" height="52"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
@@ -100,7 +116,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCQ-dJ-wps">
                             <rect key="frame" x="254.5" y="0.0" width="127.5" height="52"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVP-V3-VBW" customClass="SelectionButtonView" customModule="GCoreLabMeetDemo" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVP-V3-VBW" customClass="SelectionButtonView" customModule="GCoreVideoCallsDemo" customModuleProvider="target">
                                     <rect key="frame" x="38" y="0.0" width="52" height="52"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
@@ -117,24 +133,69 @@
                         </view>
                     </subviews>
                 </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQG-i1-eCO">
+                    <rect key="frame" x="76" y="72" width="41.5" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zfk-cm-9Cj">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <subviews>
+                        <view alpha="0.40000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xeD-SN-RAu">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gXa-e3-zki">
+                            <rect key="frame" x="156.5" y="397.5" width="101" height="101"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="noz-lh-gpg">
+                            <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="noz-lh-gpg" firstAttribute="centerX" secondItem="Zfk-cm-9Cj" secondAttribute="centerX" id="EXg-XC-85v"/>
+                        <constraint firstItem="gXa-e3-zki" firstAttribute="leading" secondItem="noz-lh-gpg" secondAttribute="leading" constant="-32" id="PCz-EJ-hST"/>
+                        <constraint firstItem="gXa-e3-zki" firstAttribute="centerY" secondItem="noz-lh-gpg" secondAttribute="centerY" id="ma4-yc-Fgj"/>
+                        <constraint firstItem="gXa-e3-zki" firstAttribute="centerX" secondItem="noz-lh-gpg" secondAttribute="centerX" id="vUE-yg-CBM"/>
+                        <constraint firstItem="gXa-e3-zki" firstAttribute="top" secondItem="noz-lh-gpg" secondAttribute="top" constant="-32" id="w1l-3H-xa3"/>
+                        <constraint firstItem="noz-lh-gpg" firstAttribute="centerY" secondItem="Zfk-cm-9Cj" secondAttribute="centerY" id="zGo-N0-1HR"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="k4r-8g-n9O" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0Fn-bT-TUM"/>
+                <constraint firstItem="Zfk-cm-9Cj" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="2SB-W9-Cxl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MzD-1S-MDf" secondAttribute="trailing" constant="16" id="2cC-lW-97k"/>
+                <constraint firstItem="IY2-mT-Q7s" firstAttribute="top" secondItem="lk9-BZ-fft" secondAttribute="bottom" constant="16" id="5BM-uE-1Wk"/>
+                <constraint firstItem="eQG-i1-eCO" firstAttribute="centerY" secondItem="S8b-vC-jrH" secondAttribute="centerY" id="5Oc-8y-34W"/>
+                <constraint firstItem="DYv-8n-PIr" firstAttribute="leading" secondItem="S8b-vC-jrH" secondAttribute="leading" id="6zl-yK-bt6"/>
+                <constraint firstItem="Zfk-cm-9Cj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FMK-UZ-jRe"/>
+                <constraint firstItem="eQG-i1-eCO" firstAttribute="leading" secondItem="S8b-vC-jrH" secondAttribute="trailing" constant="16" id="G8q-QM-TT0"/>
                 <constraint firstItem="QQc-iN-9nV" firstAttribute="centerX" secondItem="wse-yL-6kd" secondAttribute="centerX" id="O0Y-ur-arR"/>
                 <constraint firstItem="k4r-8g-n9O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="O4m-2e-TGh"/>
+                <constraint firstItem="Zfk-cm-9Cj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="PZr-G7-1Rk"/>
                 <constraint firstAttribute="bottom" secondItem="k4r-8g-n9O" secondAttribute="bottom" id="TBJ-FH-St9"/>
+                <constraint firstItem="DYv-8n-PIr" firstAttribute="top" secondItem="S8b-vC-jrH" secondAttribute="bottom" constant="32" id="Ubh-sI-WJT"/>
                 <constraint firstItem="S8b-vC-jrH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="VaL-B5-WlF"/>
+                <constraint firstItem="lk9-BZ-fft" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Yeo-7u-O18"/>
                 <constraint firstItem="wse-yL-6kd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="YvH-uq-5HC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wse-yL-6kd" secondAttribute="trailing" constant="16" id="a0Z-dZ-M9e"/>
                 <constraint firstItem="MzD-1S-MDf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="e0L-et-wo2"/>
                 <constraint firstItem="S8b-vC-jrH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="i8y-0X-jqW"/>
                 <constraint firstItem="k4r-8g-n9O" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="jIy-jX-wZQ"/>
+                <constraint firstItem="lk9-BZ-fft" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mGi-Hp-ElB"/>
                 <constraint firstItem="QQc-iN-9nV" firstAttribute="bottom" secondItem="wse-yL-6kd" secondAttribute="bottom" constant="-8" id="pTI-k6-B8k"/>
+                <constraint firstAttribute="bottom" secondItem="Zfk-cm-9Cj" secondAttribute="bottom" id="ppE-MZ-Ipd"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="MzD-1S-MDf" secondAttribute="bottom" constant="16" id="q6Y-QA-F3u"/>
                 <constraint firstItem="k4r-8g-n9O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vmK-uI-ap8"/>
+                <constraint firstItem="lk9-BZ-fft" firstAttribute="top" secondItem="S8b-vC-jrH" secondAttribute="bottom" constant="16" id="xIz-NC-1qI"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="138.61607142857142"/>
         </view>

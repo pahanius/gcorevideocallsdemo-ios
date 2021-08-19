@@ -7,6 +7,7 @@ import PinLayout
 class RoomViewController: UIViewController, RoomViewProtocol {
     
     @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var roomName: UILabel!
     @IBOutlet private weak var localVideoView: RTCEAGLVideoView!
     @IBOutlet private weak var localNameLabel: UILabel!
     @IBOutlet private weak var mainScrollView: UIScrollView!
@@ -14,6 +15,10 @@ class RoomViewController: UIViewController, RoomViewProtocol {
     @IBOutlet private weak var audioSelectionButtonView: SelectionButtonView!
     @IBOutlet private weak var videoSelectionButtonView: SelectionButtonView!
     @IBOutlet private weak var switchCameraSelectionButtonView: SelectionButtonView!
+    @IBOutlet private weak var loggerView: LoggerView!
+    @IBOutlet private weak var showLogButton: UIButton!
+    @IBOutlet private weak var loaderView: UIView!
+    @IBOutlet private weak var loaderBackView: UIView!
     
     @IBOutlet private weak var localVideoAspectRationConstraint: NSLayoutConstraint!
     
@@ -23,6 +28,13 @@ class RoomViewController: UIViewController, RoomViewProtocol {
     private var joinOptions: JoinOptions!
     private var remoteItems = Set<GCLRemoteItem>()
     private var peerConnectionsCount = 0
+    private var onAnimating: Bool = false {
+        didSet {
+            UIView.animate(withDuration: 0.15) {
+                self.loaderView.alpha = self.onAnimating ? 1.0 : 0.0
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +73,12 @@ class RoomViewController: UIViewController, RoomViewProtocol {
         
         localNameLabel.text = joinOptions.name
         localNameLabel.textColor = .white
+        
+        roomName.text = joinOptions.roomId
+        
+        loggerView.alpha = 0.0
+        loaderView.alpha = 0.0
+        loaderBackView.layer.cornerRadius = 16
     }
     
     func initListeners() {
@@ -95,6 +113,17 @@ extension RoomViewController: RTCVideoViewDelegate {
 
 private
 extension RoomViewController {
+    @IBAction func onShowLog(_ sender: Any) {
+        showLogButton.setTitle(
+            "\(self.loggerView.alpha == 0.0 ? "Hide" : "Show") Log",
+            for: .normal
+        )
+        
+        UIView.animate(withDuration: 0.15) {
+            self.loggerView.alpha = self.loggerView.alpha == 0.0 ? 1.0 : 0.0
+        }
+    }
+    
     @IBAction func onClose(_ sender: Any) {
         onClose?()
         roomManager.closeConnection()
@@ -158,6 +187,14 @@ extension RoomViewController {
 }
 
 extension RoomViewController: RoomManagerDelegate {
+    func startConnecting() {
+        onAnimating = true
+    }
+    
+    func finishConnecting() {
+        onAnimating = false
+    }
+    
     func handledPeer(_ peer: PeerObject) {
         peerConnectionsCount += 1
         let remoteItem = GCLRemoteItem(peerObject: peer, sortId: peerConnectionsCount)
@@ -176,6 +213,8 @@ extension RoomViewController: RoomManagerDelegate {
     }
     
     func joinWithPeersInRoom(_ peers: [PeerObject]) {
+        remoteItems.removeAll()
+        
         peers.forEach { peer in
             peerConnectionsCount += 1
             let remoteItem = GCLRemoteItem(peerObject: peer, sortId: peerConnectionsCount)
@@ -215,6 +254,12 @@ extension RoomViewController: RoomManagerDelegate {
     func activeSpeakerPeers(_ peers: [String]) {
         remoteItems.forEach { item in
             item.isSpeekingActive(peers.contains(item.peerId))
+        }
+    }
+    
+    func logger(_ message: String) {
+        DispatchQueue.main.async {
+            self.loggerView.append(message)
         }
     }
 }

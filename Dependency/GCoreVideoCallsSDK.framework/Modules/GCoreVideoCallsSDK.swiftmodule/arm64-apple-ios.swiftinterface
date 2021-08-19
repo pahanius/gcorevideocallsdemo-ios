@@ -133,9 +133,9 @@ public struct GCoreRoomLogger {
   public static var shared: GCoreVideoCallsSDK.GCoreRoomLogger? {
     get
   }
+  public static var log: ((Swift.String) -> Swift.Void)?
   public static func activateLogger()
   public static func disableLogger()
-  public func log(message: Swift.String)
 }
 public enum ErrorType : Swift.Error {
   case compressionError
@@ -215,6 +215,8 @@ public enum RoomError : Swift.Error {
 }
 public protocol RoomListener {
   func roomClientHandle(error: GCoreVideoCallsSDK.RoomError)
+  func roomClientStartToConnectWithServices()
+  func roomClientSuccessfullyConnectWithServices()
   func roomClientDidConnected()
   func roomClientReconnecting()
   func roomClientReconnectingFailed()

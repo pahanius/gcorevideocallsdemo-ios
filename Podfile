@@ -11,7 +11,6 @@ target 'GCoreVideoCallsDemo' do
   
   # UI
   pod 'PinLayout'
-
 end
 
 post_install do |installer|

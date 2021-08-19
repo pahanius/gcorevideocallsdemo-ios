@@ -79,6 +79,12 @@
 	///  Получена ошибка
 	func  roomClientHandle(error: RoomError)
 
+	/// Подключение SDK к сервисам
+    func roomClientStartToConnectWithServices()
+    
+    /// SDK успешно подключён к сервисам
+    func roomClientSuccessfullyConnectWithServices()
+
 	///  Успешное соединение с серверу
 	func  roomClientDidConnected()
 

@@ -3,6 +3,9 @@ import GCoreVideoCallsSDK
 import WebRTC
 
 protocol RoomManagerDelegate {
+    func startConnecting()
+    func finishConnecting()
+    
     func handledPeer(_ peer: PeerObject)
     func peerClosed(_ peer: String)
     func joinWithPeersInRoom(_ peers: [PeerObject])
@@ -14,6 +17,8 @@ protocol RoomManagerDelegate {
     func willCloseRemoteVideo(_ videoObject: VideoObject)
     func audioDidChanged(_ audioObject: AudioObject)
     func activeSpeakerPeers(_ peers: [String])
+    
+    func logger(_ message: String)
 }
 
 final class RoomManager {
@@ -27,6 +32,9 @@ final class RoomManager {
         self.joinOptions = joinOptions
         
         GCoreRoomLogger.activateLogger()
+        GCoreRoomLogger.log = { [weak self] message in
+            self?.delegate?.logger(message)
+        }
         
         let options = RoomOptions(cameraPosition: .front)
         let parameters = MeetRoomParametrs(
@@ -46,18 +54,18 @@ final class RoomManager {
     
     func toggleVideo(isOn: Bool) {
         client?.toggleVideo(isOn: isOn)
-        print("toggleVideo: ", isOn)
+        debugPrint("toggleVideo: ", isOn)
     }
     
     func toggleAudio(isOn: Bool) {
         client?.toggleAudio(isOn: isOn)
-        print("toggleAudio: ", isOn)
+        debugPrint("toggleAudio: ", isOn)
     }
     
     func toggleCamera() {
         client?.toggleCameraPosition(completion: { error in
             if let error = error {
-                print(error)
+                debugPrint(error)
             }
         })
     }
@@ -65,12 +73,20 @@ final class RoomManager {
 
 // RoomListener
 extension RoomManager: RoomListener {
+    func roomClientStartToConnectWithServices() {
+        delegate?.startConnecting()
+    }
+    
+    func roomClientSuccessfullyConnectWithServices() {
+        delegate?.finishConnecting()
+    }
+    
     func roomClientHandle(error: RoomError) {
-        print("RoomListener:", error.localizedDescription)
+        debugPrint("RoomListener:", error.localizedDescription)
     }
     
     func roomClientDidConnected() {
-        print("RoomListener: roomClientDidConnected")
+        debugPrint("RoomListener: roomClientDidConnected")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             if self.joinOptions.isVideoOn {
@@ -92,9 +108,9 @@ extension RoomManager: RoomListener {
     func roomClientReconnectingFailed() {
         print("RoomListener: roomClientReconnectingFailed")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            try? self.client?.open()
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//            try? self.client?.open()
+//        }
     }
     
     func roomClientSocketDidDisconnected(roomClient: GCoreRoomClient) {
