@@ -1,6 +1,30 @@
 
 # Change Log
+
+<!-- ## [2.2] - 2021-12-28 -->
+
+<!-- ## SDK -->
+<!-- ### Added -->
+<!-- ### Changed -->
+<!-- ### Fixed -->
+
+<!-- ## Demo приложение -->
+<!-- ### Added -->
+<!-- ### Changed -->
+<!-- ### Fixed -->
+
+## [2.2] - 2021-12-28
+
+## SDK
+
+---
+
+### Fixed
+
+- Xcode 13 compatible
  
+---
+
 ## [2.1] - 2021-08-19
 
 ## SDK
@@ -28,9 +52,6 @@ GCoreRoomLogger.log = { [weak self] message in
 }
 ```
  
-<!-- ### Changed -->
-
- 
 ### Fixed
 
 - audio stream works when the app did collapsed by the user
@@ -39,6 +60,7 @@ GCoreRoomLogger.log = { [weak self] message in
 ## Demo приложение
 
 ---
+
 ### Added
 
 - Вью для показа логов от SDK

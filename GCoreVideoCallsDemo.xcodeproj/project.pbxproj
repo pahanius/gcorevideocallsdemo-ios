@@ -39,9 +39,9 @@
 		3513FD7626BA7B3A00A6F398 /* JoinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3513FD5526BA7B3A00A6F398 /* JoinViewController.xib */; };
 		3513FD7726BA7B3A00A6F398 /* RoomCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3513FD5626BA7B3A00A6F398 /* RoomCoordinator.swift */; };
 		3513FD7826BA7B3A00A6F398 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3513FD5826BA7B3A00A6F398 /* BaseViewController.swift */; };
-		35274D4E26CE5FB60019B4EF /* GCoreVideoCallsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35274D4C26CE5F640019B4EF /* GCoreVideoCallsSDK.framework */; };
-		35274D4F26CE5FB60019B4EF /* GCoreVideoCallsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35274D4C26CE5F640019B4EF /* GCoreVideoCallsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3578DEA726CD2D0F00C7D354 /* LoggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3578DEA626CD2D0F00C7D354 /* LoggerView.swift */; };
+		35A70D27277B56D10000CCBC /* GCoreVideoCallsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35274D4C26CE5F640019B4EF /* GCoreVideoCallsSDK.framework */; };
+		35A70D28277B56D10000CCBC /* GCoreVideoCallsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35274D4C26CE5F640019B4EF /* GCoreVideoCallsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		51BA95742500D81600F11DFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA95732500D81600F11DFD /* AppDelegate.swift */; };
 		51BA957B2500D81600F11DFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51BA95792500D81600F11DFD /* Main.storyboard */; };
 		51BA957D2500D81700F11DFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51BA957C2500D81700F11DFD /* Assets.xcassets */; };
@@ -49,13 +49,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		35274D5026CE5FB60019B4EF /* Embed Frameworks */ = {
+		35A70D29277B56D10000CCBC /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				35274D4F26CE5FB60019B4EF /* GCoreVideoCallsSDK.framework in Embed Frameworks */,
+				35A70D28277B56D10000CCBC /* GCoreVideoCallsSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,7 +96,6 @@
 		3513FD5526BA7B3A00A6F398 /* JoinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JoinViewController.xib; sourceTree = "<group>"; };
 		3513FD5626BA7B3A00A6F398 /* RoomCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomCoordinator.swift; sourceTree = "<group>"; };
 		3513FD5826BA7B3A00A6F398 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		3513FD7926BA805900A6F398 /* GCoreVideoCallsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GCoreVideoCallsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35274D4C26CE5F640019B4EF /* GCoreVideoCallsSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GCoreVideoCallsSDK.framework; sourceTree = "<group>"; };
 		3578DEA626CD2D0F00C7D354 /* LoggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerView.swift; sourceTree = "<group>"; };
 		506B48024455175DFE82C285 /* Pods-GCoreLabMeetDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GCoreLabMeetDemo.debug.xcconfig"; path = "Target Support Files/Pods-GCoreLabMeetDemo/Pods-GCoreLabMeetDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,7 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35274D4E26CE5FB60019B4EF /* GCoreVideoCallsSDK.framework in Frameworks */,
+				35A70D27277B56D10000CCBC /* GCoreVideoCallsSDK.framework in Frameworks */,
 				127941B3C4DB79DD51528B19 /* Pods_GCoreVideoCallsDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,7 +366,6 @@
 		51BA95872500D88E00F11DFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3513FD7926BA805900A6F398 /* GCoreVideoCallsSDK.framework */,
 				80264AE60E71A884FF3DA4ED /* Pods_GCoreVideoCallsDemo.framework */,
 			);
 			name = Frameworks;
@@ -396,7 +394,7 @@
 				51BA956D2500D81600F11DFD /* Frameworks */,
 				51BA956E2500D81600F11DFD /* Resources */,
 				217E6E1A12278E2923B05982 /* [CP] Embed Pods Frameworks */,
-				35274D5026CE5FB60019B4EF /* Embed Frameworks */,
+				35A70D29277B56D10000CCBC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -679,6 +677,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GCoreVideoCallsDemo/GCoreVideoCallsDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QHPL9YR7PH;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -693,6 +692,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.l-tech.GCoreVideoCallsDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -708,6 +708,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GCoreVideoCallsDemo/GCoreVideoCallsDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QHPL9YR7PH;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -722,6 +723,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.l-tech.GCoreVideoCallsDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
