@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
-// swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name GCoreVideoCallsSDK
+// swift-module-flags: -target x86_64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name GCoreVideoCallsSDK
 import AVFoundation
 import CommonCrypto
 import Foundation
@@ -192,10 +192,10 @@ open class WebSocket : GCoreVideoCallsSDK.WebSocketClient, GCoreVideoCallsSDK.En
   public var callbackQueue: Dispatch.DispatchQueue
   public var respondToPingWithPong: Swift.Bool {
     get
-    set(newValue)
+    set
   }
   public init(request: Foundation.URLRequest, engine: GCoreVideoCallsSDK.Engine)
-  public convenience init(request: Foundation.URLRequest, certPinner: GCoreVideoCallsSDK.CertificatePinning? = FoundationSecurity(), compressionHandler: GCoreVideoCallsSDK.CompressionHandler? = nil, useCustomEngine: Swift.Bool = true)
+  convenience public init(request: Foundation.URLRequest, certPinner: GCoreVideoCallsSDK.CertificatePinning? = FoundationSecurity(), compressionHandler: GCoreVideoCallsSDK.CompressionHandler? = nil, useCustomEngine: Swift.Bool = true)
   public func connect()
   public func disconnect(closeCode: Swift.UInt16 = CloseCode.normal.rawValue)
   public func forceDisconnect()
@@ -428,7 +428,7 @@ public struct JSON {
   }
   public var object: Any {
     get
-    set(newValue)
+    set
   }
   @available(*, unavailable, renamed: "null")
   public static var nullJSON: GCoreVideoCallsSDK.JSON {
@@ -484,11 +484,11 @@ extension Swift.String : GCoreVideoCallsSDK.JSONSubscriptType {
 extension GCoreVideoCallsSDK.JSON {
   public subscript(path: [GCoreVideoCallsSDK.JSONSubscriptType]) -> GCoreVideoCallsSDK.JSON {
     get
-    set(newValue)
+    set
   }
   public subscript(path: GCoreVideoCallsSDK.JSONSubscriptType...) -> GCoreVideoCallsSDK.JSON {
     get
-    set(newValue)
+    set
   }
 }
 extension GCoreVideoCallsSDK.JSON : Swift.ExpressibleByStringLiteral {
@@ -547,7 +547,7 @@ extension GCoreVideoCallsSDK.JSON {
   }
   public var arrayObject: [Any]? {
     get
-    set(newValue)
+    set
   }
 }
 extension GCoreVideoCallsSDK.JSON {
@@ -559,148 +559,148 @@ extension GCoreVideoCallsSDK.JSON {
   }
   public var dictionaryObject: [Swift.String : Any]? {
     get
-    set(newValue)
+    set
   }
 }
 extension GCoreVideoCallsSDK.JSON {
   public var bool: Swift.Bool? {
     get
-    set(newValue)
+    set
   }
   public var boolValue: Swift.Bool {
     get
-    set(newValue)
+    set
   }
 }
 extension GCoreVideoCallsSDK.JSON {
   public var string: Swift.String? {
     get
-    set(newValue)
+    set
   }
   public var stringValue: Swift.String {
     get
-    set(newValue)
+    set
   }
 }
 extension GCoreVideoCallsSDK.JSON {
   public var number: Foundation.NSNumber? {
     get
-    set(newValue)
+    set
   }
   public var numberValue: Foundation.NSNumber {
     get
-    set(newValue)
+    set
   }
 }
 extension GCoreVideoCallsSDK.JSON {
   public var null: Foundation.NSNull? {
     get
-    set(newValue)
+    set
   }
   public func exists() -> Swift.Bool
 }
 extension GCoreVideoCallsSDK.JSON {
   public var url: Foundation.URL? {
     get
-    set(newValue)
+    set
   }
 }
 extension GCoreVideoCallsSDK.JSON {
   public var double: Swift.Double? {
     get
-    set(newValue)
+    set
   }
   public var doubleValue: Swift.Double {
     get
-    set(newValue)
+    set
   }
   public var float: Swift.Float? {
     get
-    set(newValue)
+    set
   }
   public var floatValue: Swift.Float {
     get
-    set(newValue)
+    set
   }
   public var int: Swift.Int? {
     get
-    set(newValue)
+    set
   }
   public var intValue: Swift.Int {
     get
-    set(newValue)
+    set
   }
   public var uInt: Swift.UInt? {
     get
-    set(newValue)
+    set
   }
   public var uIntValue: Swift.UInt {
     get
-    set(newValue)
+    set
   }
   public var int8: Swift.Int8? {
     get
-    set(newValue)
+    set
   }
   public var int8Value: Swift.Int8 {
     get
-    set(newValue)
+    set
   }
   public var uInt8: Swift.UInt8? {
     get
-    set(newValue)
+    set
   }
   public var uInt8Value: Swift.UInt8 {
     get
-    set(newValue)
+    set
   }
   public var int16: Swift.Int16? {
     get
-    set(newValue)
+    set
   }
   public var int16Value: Swift.Int16 {
     get
-    set(newValue)
+    set
   }
   public var uInt16: Swift.UInt16? {
     get
-    set(newValue)
+    set
   }
   public var uInt16Value: Swift.UInt16 {
     get
-    set(newValue)
+    set
   }
   public var int32: Swift.Int32? {
     get
-    set(newValue)
+    set
   }
   public var int32Value: Swift.Int32 {
     get
-    set(newValue)
+    set
   }
   public var uInt32: Swift.UInt32? {
     get
-    set(newValue)
+    set
   }
   public var uInt32Value: Swift.UInt32 {
     get
-    set(newValue)
+    set
   }
   public var int64: Swift.Int64? {
     get
-    set(newValue)
+    set
   }
   public var int64Value: Swift.Int64 {
     get
-    set(newValue)
+    set
   }
   public var uInt64: Swift.UInt64? {
     get
-    set(newValue)
+    set
   }
   public var uInt64Value: Swift.UInt64 {
     get
-    set(newValue)
+    set
   }
 }
 extension GCoreVideoCallsSDK.JSON : Swift.Comparable {
@@ -848,3 +848,30 @@ public protocol StarscreamTransport : AnyObject {
   func write(data: Foundation.Data, completion: @escaping ((Swift.Error?) -> ()))
   var usingTLS: Swift.Bool { get }
 }
+extension GCoreVideoCallsSDK.FoundationTransportError : Swift.Equatable {}
+extension GCoreVideoCallsSDK.FoundationTransportError : Swift.Hashable {}
+extension GCoreVideoCallsSDK.SecurityErrorCode : Swift.Equatable {}
+extension GCoreVideoCallsSDK.SecurityErrorCode : Swift.Hashable {}
+extension GCoreVideoCallsSDK.SecurityErrorCode : Swift.RawRepresentable {}
+extension GCoreVideoCallsSDK.ErrorType : Swift.Equatable {}
+extension GCoreVideoCallsSDK.ErrorType : Swift.Hashable {}
+extension GCoreVideoCallsSDK.MediaError : Swift.Equatable {}
+extension GCoreVideoCallsSDK.MediaError : Swift.Hashable {}
+extension GCoreVideoCallsSDK.CloseCode : Swift.Equatable {}
+extension GCoreVideoCallsSDK.CloseCode : Swift.Hashable {}
+extension GCoreVideoCallsSDK.CloseCode : Swift.RawRepresentable {}
+extension GCoreVideoCallsSDK.FrameOpCode : Swift.Equatable {}
+extension GCoreVideoCallsSDK.FrameOpCode : Swift.Hashable {}
+extension GCoreVideoCallsSDK.FrameOpCode : Swift.RawRepresentable {}
+extension GCoreVideoCallsSDK.FoundationSecurityError : Swift.Equatable {}
+extension GCoreVideoCallsSDK.FoundationSecurityError : Swift.Hashable {}
+extension GCoreVideoCallsSDK.TCPTransportError : Swift.Equatable {}
+extension GCoreVideoCallsSDK.TCPTransportError : Swift.Hashable {}
+extension GCoreVideoCallsSDK.SwiftyJSONError : Swift.Equatable {}
+extension GCoreVideoCallsSDK.SwiftyJSONError : Swift.Hashable {}
+extension GCoreVideoCallsSDK.SwiftyJSONError : Swift.RawRepresentable {}
+extension GCoreVideoCallsSDK.`Type` : Swift.Equatable {}
+extension GCoreVideoCallsSDK.`Type` : Swift.Hashable {}
+extension GCoreVideoCallsSDK.`Type` : Swift.RawRepresentable {}
+extension GCoreVideoCallsSDK.writingOptionsKeys : Swift.Equatable {}
+extension GCoreVideoCallsSDK.writingOptionsKeys : Swift.Hashable {}

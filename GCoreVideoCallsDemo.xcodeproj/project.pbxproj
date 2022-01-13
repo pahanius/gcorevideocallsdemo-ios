@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		127941B3C4DB79DD51528B19 /* Pods_GCoreVideoCallsDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80264AE60E71A884FF3DA4ED /* Pods_GCoreVideoCallsDemo.framework */; };
 		3513FD5926BA7B3A00A6F398 /* CoordinatorFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3513FD2926BA7B3A00A6F398 /* CoordinatorFactoryProtocol.swift */; };
 		3513FD5A26BA7B3A00A6F398 /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3513FD2A26BA7B3A00A6F398 /* CoordinatorFactory.swift */; };
 		3513FD5B26BA7B3A00A6F398 /* RoomFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3513FD2C26BA7B3A00A6F398 /* RoomFactory.swift */; };
@@ -40,8 +39,8 @@
 		3513FD7726BA7B3A00A6F398 /* RoomCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3513FD5626BA7B3A00A6F398 /* RoomCoordinator.swift */; };
 		3513FD7826BA7B3A00A6F398 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3513FD5826BA7B3A00A6F398 /* BaseViewController.swift */; };
 		3578DEA726CD2D0F00C7D354 /* LoggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3578DEA626CD2D0F00C7D354 /* LoggerView.swift */; };
-		35A70D27277B56D10000CCBC /* GCoreVideoCallsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35274D4C26CE5F640019B4EF /* GCoreVideoCallsSDK.framework */; };
-		35A70D28277B56D10000CCBC /* GCoreVideoCallsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35274D4C26CE5F640019B4EF /* GCoreVideoCallsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		35C2627027905C5B00B94C9F /* GCoreVideoCallsSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C2626F27905C5B00B94C9F /* GCoreVideoCallsSDK.xcframework */; };
+		35C2627127905C5B00B94C9F /* GCoreVideoCallsSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35C2626F27905C5B00B94C9F /* GCoreVideoCallsSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		51BA95742500D81600F11DFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA95732500D81600F11DFD /* AppDelegate.swift */; };
 		51BA957B2500D81600F11DFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51BA95792500D81600F11DFD /* Main.storyboard */; };
 		51BA957D2500D81700F11DFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51BA957C2500D81700F11DFD /* Assets.xcassets */; };
@@ -49,13 +48,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		35A70D29277B56D10000CCBC /* Embed Frameworks */ = {
+		35C2627227905C5B00B94C9F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				35A70D28277B56D10000CCBC /* GCoreVideoCallsSDK.framework in Embed Frameworks */,
+				35C2627127905C5B00B94C9F /* GCoreVideoCallsSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,18 +95,15 @@
 		3513FD5526BA7B3A00A6F398 /* JoinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JoinViewController.xib; sourceTree = "<group>"; };
 		3513FD5626BA7B3A00A6F398 /* RoomCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomCoordinator.swift; sourceTree = "<group>"; };
 		3513FD5826BA7B3A00A6F398 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		35274D4C26CE5F640019B4EF /* GCoreVideoCallsSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GCoreVideoCallsSDK.framework; sourceTree = "<group>"; };
 		3578DEA626CD2D0F00C7D354 /* LoggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerView.swift; sourceTree = "<group>"; };
-		506B48024455175DFE82C285 /* Pods-GCoreLabMeetDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GCoreLabMeetDemo.debug.xcconfig"; path = "Target Support Files/Pods-GCoreLabMeetDemo/Pods-GCoreLabMeetDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		35C2626F27905C5B00B94C9F /* GCoreVideoCallsSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GCoreVideoCallsSDK.xcframework; path = Dependencies/GCoreVideoCallsSDK.xcframework; sourceTree = "<group>"; };
 		51BA95702500D81600F11DFD /* GCoreVideoCallsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GCoreVideoCallsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BA95732500D81600F11DFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51BA957A2500D81600F11DFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		51BA957C2500D81700F11DFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51BA957F2500D81700F11DFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51BA95812500D81700F11DFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		80264AE60E71A884FF3DA4ED /* Pods_GCoreVideoCallsDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GCoreVideoCallsDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80C0A0798ABDE35B5443DE1F /* Pods-GCoreVideoCallsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GCoreVideoCallsDemo.release.xcconfig"; path = "Target Support Files/Pods-GCoreVideoCallsDemo/Pods-GCoreVideoCallsDemo.release.xcconfig"; sourceTree = "<group>"; };
-		9F9BA2A83726768AB3A4336B /* Pods-GCoreLabMeetDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GCoreLabMeetDemo.release.xcconfig"; path = "Target Support Files/Pods-GCoreLabMeetDemo/Pods-GCoreLabMeetDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35A70D27277B56D10000CCBC /* GCoreVideoCallsSDK.framework in Frameworks */,
-				127941B3C4DB79DD51528B19 /* Pods_GCoreVideoCallsDemo.framework in Frameworks */,
+				35C2627027905C5B00B94C9F /* GCoreVideoCallsSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,14 +290,6 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		35274D4B26CE5F640019B4EF /* Dependency */ = {
-			isa = PBXGroup;
-			children = (
-				35274D4C26CE5F640019B4EF /* GCoreVideoCallsSDK.framework */,
-			);
-			path = Dependency;
-			sourceTree = SOURCE_ROOT;
-		};
 		3578DEA526CD17A900C7D354 /* Logger */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,7 +338,6 @@
 		51BA95722500D81600F11DFD /* GCoreVideoCallsDemo */ = {
 			isa = PBXGroup;
 			children = (
-				35274D4B26CE5F640019B4EF /* Dependency */,
 				35131C1B26B2C3AE0095A7F8 /* GCoreVideoCallsDemo.entitlements */,
 				35E45B8D26A0578300D72E4B /* Application */,
 				35E45B8E26A0578B00D72E4B /* Resources */,
@@ -366,7 +352,7 @@
 		51BA95872500D88E00F11DFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				80264AE60E71A884FF3DA4ED /* Pods_GCoreVideoCallsDemo.framework */,
+				35C2626F27905C5B00B94C9F /* GCoreVideoCallsSDK.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -374,8 +360,6 @@
 		DB2030DCD2AAE14EFA260029 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				506B48024455175DFE82C285 /* Pods-GCoreLabMeetDemo.debug.xcconfig */,
-				9F9BA2A83726768AB3A4336B /* Pods-GCoreLabMeetDemo.release.xcconfig */,
 				175FAEE08CE4AF317C19AEF7 /* Pods-GCoreVideoCallsDemo.debug.xcconfig */,
 				80C0A0798ABDE35B5443DE1F /* Pods-GCoreVideoCallsDemo.release.xcconfig */,
 			);
@@ -394,13 +378,15 @@
 				51BA956D2500D81600F11DFD /* Frameworks */,
 				51BA956E2500D81600F11DFD /* Resources */,
 				217E6E1A12278E2923B05982 /* [CP] Embed Pods Frameworks */,
-				35A70D29277B56D10000CCBC /* Embed Frameworks */,
+				35C2627227905C5B00B94C9F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = GCoreVideoCallsDemo;
+			packageProductDependencies = (
+			);
 			productName = GCoreLabMeetDemo;
 			productReference = 51BA95702500D81600F11DFD /* GCoreVideoCallsDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -429,6 +415,8 @@
 				Base,
 			);
 			mainGroup = 51BA95672500D81600F11DFD;
+			packageReferences = (
+			);
 			productRefGroup = 51BA95712500D81600F11DFD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
