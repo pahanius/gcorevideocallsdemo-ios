@@ -13,6 +13,46 @@
 <!-- ### Changed -->
 <!-- ### Fixed -->
 
+## [2.3] - 2022-01-13
+
+## SDK
+
+---
+
+- SDK собрано в XCode **13.2.1 (13C100)** и будет работать только c соответствующим toolchain (**Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)**)
+
+## Demo приложение
+
+---
+
+### Added
+
+- GCoreVideoCallsSDK.xcframework можно установить через Package Dependancies
+
+Для установки через Package Dependancies нужно удалить GCoreVideoCallsSDK.xcframework из Targets->General->Frameworks, Libraries, and Embedded Content
+
+<details>
+  <summary>Remove Library (gif)</summary>
+
+![Remove Library](images/1-remove-library.gif)
+
+</details>
+<br>
+
+Добавить библиотеку, прописав в поиске Apple Swift Packages репозиторий https://github.com/pahanius/GCoreVideoCallsSDK.git
+
+<details>
+  <summary>Add Package (gif)</summary>
+
+![Add Package](images/2-add-package.gif)
+
+</details>
+<br>
+
+### Changed
+
+- Библиотека GCoreVideoCallsSDK замена на GCoreVideoCallsSDK.xcframework
+
 ## [2.2] - 2021-12-28
 
 ## SDK
