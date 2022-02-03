@@ -14,31 +14,31 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		1VhHGGXZ9WELlfvUDNTDwK1l2+0=
+		zYCd5uL8LIcUsBfD5ZKpNLjiUY4=
 		</data>
 		<key>Modules/GCoreVideoCallsSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		RKkZCUXB9eXsDtnN5bqvbGDQsmA=
+		U59n5ZK2g2iUtwvDQ/PV2KKox48=
 		</data>
 		<key>Modules/GCoreVideoCallsSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		fm4ng2IlYhbip9JaiFLILpL/uJk=
+		HIGS9rxV00LwF4+5meXAdUf6sJo=
 		</data>
 		<key>Modules/GCoreVideoCallsSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		dabT7MZcZyRpTiySwbgdr7lI94w=
+		GOyJRCwHqZ0FgcwXh/tmvYpMLUU=
 		</data>
 		<key>Modules/GCoreVideoCallsSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		RKkZCUXB9eXsDtnN5bqvbGDQsmA=
+		U59n5ZK2g2iUtwvDQ/PV2KKox48=
 		</data>
 		<key>Modules/GCoreVideoCallsSDK.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		fm4ng2IlYhbip9JaiFLILpL/uJk=
+		HIGS9rxV00LwF4+5meXAdUf6sJo=
 		</data>
 		<key>Modules/GCoreVideoCallsSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		dabT7MZcZyRpTiySwbgdr7lI94w=
+		GOyJRCwHqZ0FgcwXh/tmvYpMLUU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -69,42 +69,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			fiXyY2ZG5jxn7XuZ2xeNNNECuDsoP/THlW4yprRjAo4=
+			GnpbGkAnq17G5mGECh2jH5R9osSQTDgMeITFDC3n468=
 			</data>
 		</dict>
 		<key>Modules/GCoreVideoCallsSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			f0M2O3hUs2uVlRdS4mHbSJHwK+G41YO45cqHvUGqoFo=
+			yWtMRP7kINQfgOHYRAfPJHLKZJIRqP6He04QxKx9ic8=
 			</data>
 		</dict>
 		<key>Modules/GCoreVideoCallsSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			frIaLR0vmVUyJghijwhatzAMy42uqS2e2vfSY8j/5Fc=
+			F4gzGgUIBlE/RpKXCPcVinmdH1mE3LVSSr2Je/8OmaE=
 			</data>
 		</dict>
 		<key>Modules/GCoreVideoCallsSDK.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fiXyY2ZG5jxn7XuZ2xeNNNECuDsoP/THlW4yprRjAo4=
+			GnpbGkAnq17G5mGECh2jH5R9osSQTDgMeITFDC3n468=
 			</data>
 		</dict>
 		<key>Modules/GCoreVideoCallsSDK.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			f0M2O3hUs2uVlRdS4mHbSJHwK+G41YO45cqHvUGqoFo=
+			yWtMRP7kINQfgOHYRAfPJHLKZJIRqP6He04QxKx9ic8=
 			</data>
 		</dict>
 		<key>Modules/GCoreVideoCallsSDK.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			frIaLR0vmVUyJghijwhatzAMy42uqS2e2vfSY8j/5Fc=
+			F4gzGgUIBlE/RpKXCPcVinmdH1mE3LVSSr2Je/8OmaE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

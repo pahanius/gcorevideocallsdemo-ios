@@ -3,8 +3,13 @@ import Foundation
 import GCoreVideoCallsSDK
 import WebRTC
 import PinLayout
+import UIKit
 
-class GCLRemoteView: UIView {
+protocol GCLRemoteViewOutput {
+    var onMore: (() -> Void)? { get set }
+}
+
+class GCLRemoteView: UIView, GCLRemoteViewOutput {
     private let rtcVideoView = RTCEAGLVideoView()
     private let nameLabel: UILabel = {
         let lbl = UILabel()
@@ -13,6 +18,12 @@ class GCLRemoteView: UIView {
         return lbl
     }()
     private let avatarImageView = UIImageView()
+    private let moreButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "icon_more"), for: .normal)
+        button.tintColor = .white
+        return button
+    }()
     private let videoImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "video_off")
@@ -38,12 +49,15 @@ class GCLRemoteView: UIView {
     private var isVideoLandscape = false
     private let peerObject: PeerObject
     
+    var onMore: (() -> Void)?
+    
     init(peerObject: PeerObject) {
         self.peerObject = peerObject
         
         super.init(frame: .zero)
         
         initUI()
+        initListeners()
     }
     
     required init?(coder: NSCoder) {
@@ -68,6 +82,11 @@ class GCLRemoteView: UIView {
         avatarImageView.pin
             .sizeToFit()
             .center()
+        
+        moreButton.pin
+            .topLeft()
+            .width(44)
+            .height(44)
         
         videoImageView.pin
             .topRight(8)
@@ -137,8 +156,20 @@ extension GCLRemoteView {
         
         addSubview(videoImageView)
         addSubview(audioImageView)
+        addSubview(moreButton)
         
         setNeedsLayout()
+    }
+    
+    func initListeners() {
+        moreButton.addTarget(self, action: #selector(onMoreButton), for: .touchUpInside)
+    }
+}
+
+private
+extension GCLRemoteView {
+    @objc func onMoreButton() {
+        onMore?()
     }
 }
 

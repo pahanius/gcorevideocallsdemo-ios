@@ -108,6 +108,13 @@ public protocol FrameCollectorDelegate : AnyObject {
   public func add(frame: GCoreVideoCallsSDK.Frame)
   @objc deinit
 }
+final public class JoinPermissionsObject : Swift.Decodable {
+  final public let audio: Swift.Bool
+  final public let video: Swift.Bool
+  final public let share: Swift.Bool
+  @objc deinit
+  public init(from decoder: Swift.Decoder) throws
+}
 @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @available(watchOS, unavailable)
 public class WebSocketServer : GCoreVideoCallsSDK.Server, GCoreVideoCallsSDK.ConnectionDelegate {
@@ -221,6 +228,7 @@ public protocol RoomListener {
   func roomClientReconnecting()
   func roomClientReconnectingFailed()
   func roomClientSocketDidDisconnected(roomClient: GCoreVideoCallsSDK.GCoreRoomClient)
+  func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, joinPermissions: GCoreVideoCallsSDK.JoinPermissionsObject)
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, joinWithPeersInRoom peers: [GCoreVideoCallsSDK.PeerObject])
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, handlePeer: GCoreVideoCallsSDK.PeerObject)
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, peerClosed: Swift.String)
@@ -233,6 +241,9 @@ public protocol RoomListener {
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, produceRemoteAudio audioObject: GCoreVideoCallsSDK.AudioObject)
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, didCloseRemoteAudioByModerator byModerator: Swift.Bool, audioObject: GCoreVideoCallsSDK.AudioObject)
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, activeSpeakerPeers peers: [Swift.String])
+  func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, toggleByModerator kind: Swift.String, status: Swift.Bool)
+  func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, acceptedPermissionsFromModerator fromModerator: Swift.Bool, peer: GCoreVideoCallsSDK.PeerObject, requestType: Swift.String)
+  func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, disableProducerByModerator kind: Swift.String)
 }
 public enum MediaError : Swift.Error {
   case CAMERA_DEVICE_NOT_FOUND
@@ -750,6 +761,9 @@ final public class GCoreRoomClient {
   final public func toggleAudio(isOn: Swift.Bool)
   final public func toggleVideo(isOn: Swift.Bool)
   final public func toggleCameraPosition(completion: ((Swift.Error?) -> Swift.Void)?)
+  final public func askModeratorToEnableTrack(kind: Swift.String)
+  final public func acceptedPermissionByModerator(peerId: Swift.String, kind: Swift.String)
+  final public func disableTrackProducerByModerator(peerId: Swift.String, kind: Swift.String)
   final public func open() throws
   final public func close()
   final public func audioSessionActivate()
@@ -823,7 +837,7 @@ public class WSEngine : GCoreVideoCallsSDK.Engine, GCoreVideoCallsSDK.TransportE
   public func didForm(event: GCoreVideoCallsSDK.FrameCollector.Event)
   @objc deinit
 }
-final public class PeerObject : Swift.Decodable {
+@_hasMissingDesignatedInitializers final public class PeerObject : Swift.Decodable {
   final public let id: Swift.String
   final public let displayName: Swift.String?
   @objc deinit

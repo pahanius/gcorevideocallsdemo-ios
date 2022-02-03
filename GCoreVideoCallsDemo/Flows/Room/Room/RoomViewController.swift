@@ -47,6 +47,7 @@ class RoomViewController: UIViewController, RoomViewProtocol {
         super.viewDidLayoutSubviews()
         
         updateRemoteVideoTracksLayouts()
+        setRemoteItemsListeners()
     }
     
     func configure(joinOptions: JoinOptions) {
@@ -83,15 +84,79 @@ class RoomViewController: UIViewController, RoomViewProtocol {
     
     func initListeners() {
         audioSelectionButtonView.stateChanged = { [weak self] isOn in
-            self?.roomManager.toggleAudio(isOn: isOn)
+            if self?.audioSelectionButtonView.isEnabled == true {
+                self?.roomManager.toggleAudio(isOn: isOn)
+            } else {
+                let alert = UIAlertController(
+                    title: "Mics are currently disabled in this room",
+                    message: "Ask moderator to enable mic?",
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    self?.roomManager.askModeratorToEnableTrack(type: .audio)
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
+                self?.present(alert, animated: true, completion: nil)
+            }
         }
         
         videoSelectionButtonView.stateChanged = { [weak self] isOn in
-            self?.roomManager.toggleVideo(isOn: isOn)
+            if self?.videoSelectionButtonView.isEnabled == true {
+                self?.roomManager.toggleVideo(isOn: isOn)
+            } else {
+                let alert = UIAlertController(
+                    title: "Webcams are currently disabled in this room",
+                    message: "Ask moderator to enable webcam?",
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    self?.roomManager.askModeratorToEnableTrack(type: .video)
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
+                self?.present(alert, animated: true, completion: nil)
+            }
         }
         
         switchCameraSelectionButtonView.stateChanged = { [weak self] _ in
             self?.roomManager.toggleCamera()
+        }
+    }
+    
+    func setRemoteItemsListeners() {
+        remoteItems.forEach { item in
+            item.view.onMore = {
+                let message: String
+                if let displayName = item.displayName {
+                    message = "Make your judgment for \(displayName)"
+                } else {
+                    message = "Make your judgment"
+                }
+                let alert = UIAlertController(
+                    title: "Feel the power",
+                    message: message,
+                    preferredStyle: .actionSheet
+                )
+                alert.addAction(UIAlertAction(title: "Turn off mic", style: .default, handler: { action in
+                    self.roomManager.disableTrackProducerByModerator(peerId: item.peerId, type: .audio)
+                }))
+                alert.addAction(UIAlertAction(title: "Turn off webcam", style: .default, handler: { action in
+                    self.roomManager.disableTrackProducerByModerator(peerId: item.peerId, type: .video)
+                }))
+                alert.addAction(UIAlertAction(title: "Turn off sharing", style: .default, handler: { action in
+                    self.roomManager.disableTrackProducerByModerator(peerId: item.peerId, type: .share)
+                }))
+                alert.addAction(UIAlertAction(title: "Enable mic", style: .default, handler: { action in
+                    self.roomManager.acceptedPermissionByModerator(peerId: item.peerId, type: .audio)
+                }))
+                alert.addAction(UIAlertAction(title: "Enable webcam", style: .default, handler: { action in
+                    self.roomManager.acceptedPermissionByModerator(peerId: item.peerId, type: .video)
+                }))
+                alert.addAction(UIAlertAction(title: "Enable sharing", style: .default, handler: { action in
+                    self.roomManager.acceptedPermissionByModerator(peerId: item.peerId, type: .share)
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
 }
@@ -186,6 +251,14 @@ extension RoomViewController {
     }
 }
 
+private
+extension RoomViewController {
+    func localVideoView(isEnabled: Bool) {
+        localVideoView.layer.borderColor = UIColor.red.cgColor
+        localVideoView.layer.borderWidth = isEnabled ? 0.0 : 1.0
+    }
+}
+
 extension RoomViewController: RoomManagerDelegate {
     func startConnecting() {
         onAnimating = true
@@ -225,12 +298,22 @@ extension RoomViewController: RoomManagerDelegate {
         view.setNeedsLayout()
     }
     
+    func joinWithPermissions(_ joinPermissions: JoinPermissionsObject) {
+        audioSelectionButtonView.isEnabled = joinPermissions.audio
+        videoSelectionButtonView.isEnabled = joinPermissions.video
+    }
+    
     func produceLocalVideoTrack(_ videoTrack: RTCVideoTrack) {
         videoTrack.add(localVideoView)
+        localVideoView(isEnabled: true)
     }
     
     func produceLocalAudioTrack(_ audioTrack: RTCAudioTrack) {
         
+    }
+    
+    func didCloseLocalVideoTrack() {
+        localVideoView(isEnabled: false)
     }
     
     func handledRemoteVideo(_ videoObject: VideoObject) {
@@ -254,6 +337,39 @@ extension RoomViewController: RoomManagerDelegate {
     func activeSpeakerPeers(_ peers: [String]) {
         remoteItems.forEach { item in
             item.isSpeekingActive(peers.contains(item.peerId))
+        }
+    }
+    
+    func toggleByModerator(kind: StreamType, status: Bool) {
+        switch kind {
+        case .audio:
+            audioSelectionButtonView.isEnabled = status
+        case .video:
+            videoSelectionButtonView.isEnabled = status
+        case .share:
+            break
+        }
+    }
+    
+    func acceptedPermission(kind: StreamType) {
+        switch kind {
+        case .audio:
+            audioSelectionButtonView.isEnabled = true
+        case .video:
+            videoSelectionButtonView.isEnabled = true
+        case .share:
+            break
+        }
+    }
+    
+    func disableByModerator(kind: StreamType) {
+        switch kind {
+        case .audio:
+            audioSelectionButtonView.isEnabled = false
+        case .video:
+            videoSelectionButtonView.isEnabled = false
+        case .share:
+            break
         }
     }
     

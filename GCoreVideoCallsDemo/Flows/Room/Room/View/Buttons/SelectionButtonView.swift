@@ -14,6 +14,19 @@ class SelectionButtonView: UIView {
     
     var type: SelectionButtonType = .microphone
     
+    var isEnabled: Bool = true {
+        didSet {
+            if !isEnabled {
+                isOn = false
+            }
+            
+            button.backgroundColor = isEnabled
+            ? isOn ? UIColor(rgb: 0x6ab93d) : UIColor(rgb: 0x2f264a)
+            : UIColor(rgb: 0xf7c0cb)
+            iconImageView.alpha = isEnabled ? 1.0 : 0.6
+        }
+    }
+    
     var isOn: Bool = false {
         didSet {
             updateState()
@@ -62,12 +75,16 @@ class SelectionButtonView: UIView {
             return
         }
         
-        button.backgroundColor = isOn ? UIColor(rgb: 0x6ab93d) : UIColor(rgb: 0x2f264a)
+        button.backgroundColor = isEnabled
+        ? isOn ? UIColor(rgb: 0x6ab93d) : UIColor(rgb: 0x2f264a)
+        : UIColor(rgb: 0xf7c0cb)
         iconImageView.isHighlighted = isOn
     }
     
     @objc private func onButton() {
-        isOn = !isOn
+        if isEnabled {
+            isOn = !isOn
+        }
         updateState()
         stateChanged?(isOn)
     }

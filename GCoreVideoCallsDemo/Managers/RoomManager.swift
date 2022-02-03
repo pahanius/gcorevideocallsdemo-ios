@@ -1,6 +1,13 @@
 
 import GCoreVideoCallsSDK
 import WebRTC
+import Foundation
+
+enum StreamType: String {
+    case audio
+    case video
+    case share
+}
 
 protocol RoomManagerDelegate {
     func startConnecting()
@@ -9,14 +16,19 @@ protocol RoomManagerDelegate {
     func handledPeer(_ peer: PeerObject)
     func peerClosed(_ peer: String)
     func joinWithPeersInRoom(_ peers: [PeerObject])
+    func joinWithPermissions(_ joinPermissions: JoinPermissionsObject)
     
     func produceLocalVideoTrack(_ videoTrack: RTCVideoTrack)
     func produceLocalAudioTrack(_ audioTrack: RTCAudioTrack)
+    func didCloseLocalVideoTrack()
     
     func handledRemoteVideo(_ videoObject: VideoObject)
     func willCloseRemoteVideo(_ videoObject: VideoObject)
     func audioDidChanged(_ audioObject: AudioObject)
     func activeSpeakerPeers(_ peers: [String])
+    func toggleByModerator(kind: StreamType, status: Bool)
+    func acceptedPermission(kind: StreamType)
+    func disableByModerator(kind: StreamType)
     
     func logger(_ message: String)
 }
@@ -69,6 +81,18 @@ final class RoomManager {
             }
         })
     }
+    
+    func askModeratorToEnableTrack(type: StreamType) {
+        client?.askModeratorToEnableTrack(kind: type.rawValue)
+    }
+    
+    func acceptedPermissionByModerator(peerId: String, type: StreamType) {
+        client?.acceptedPermissionByModerator(peerId: peerId, kind: type.rawValue)
+    }
+    
+    func disableTrackProducerByModerator(peerId: String, type: StreamType) {
+        client?.disableTrackProducerByModerator(peerId: peerId, kind: type.rawValue)
+    }
 }
 
 // RoomListener
@@ -87,18 +111,6 @@ extension RoomManager: RoomListener {
     
     func roomClientDidConnected() {
         debugPrint("RoomListener: roomClientDidConnected")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if self.joinOptions.isVideoOn {
-                self.toggleVideo(isOn: self.joinOptions.isVideoOn)
-                print("toggleVideo joined: ", self.joinOptions.isVideoOn)
-            }
-            
-            if self.joinOptions.isAudioOn {
-                self.toggleAudio(isOn: self.joinOptions.isAudioOn)
-                print("toggleAudio joined: ", self.joinOptions.isAudioOn)
-            }
-        }
     }
     
     func roomClientReconnecting() {
@@ -107,14 +119,26 @@ extension RoomManager: RoomListener {
     
     func roomClientReconnectingFailed() {
         print("RoomListener: roomClientReconnectingFailed")
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            try? self.client?.open()
-//        }
     }
     
     func roomClientSocketDidDisconnected(roomClient: GCoreRoomClient) {
         print("RoomListener: roomClientSocketDidDisconnected", roomClient)
+    }
+    
+    func roomClient(roomClient: GCoreRoomClient, joinPermissions: JoinPermissionsObject) {
+        print("RoomListener: joinPermissions:", joinPermissions)
+        delegate?.joinWithPermissions(joinPermissions)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if self.joinOptions.isAudioOn && joinPermissions.audio {
+                self.toggleAudio(isOn: self.joinOptions.isAudioOn)
+                print("toggleAudio joined: ", self.joinOptions.isAudioOn)
+            }
+            if self.joinOptions.isVideoOn && joinPermissions.video {
+                self.toggleVideo(isOn: self.joinOptions.isVideoOn)
+                print("toggleVideo joined: ", self.joinOptions.isVideoOn)
+            }
+        }
     }
     
     func roomClient(roomClient: GCoreRoomClient, joinWithPeersInRoom peers: [PeerObject]) {
@@ -134,7 +158,9 @@ extension RoomManager: RoomListener {
     
     func roomClient(roomClient: GCoreRoomClient, produceLocalVideoTrack videoTrack: RTCVideoTrack) {
         print("RoomListener: produceLocalVideoTrack:", videoTrack)
-        delegate?.produceLocalVideoTrack(videoTrack)
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.produceLocalVideoTrack(videoTrack)
+        }
     }
     
     func roomClient(roomClient: GCoreRoomClient, produceLocalAudioTrack audioTrack: RTCAudioTrack) {
@@ -144,6 +170,9 @@ extension RoomManager: RoomListener {
     
     func roomClient(roomClient: GCoreRoomClient, didCloseLocalVideoTrack videoTrack: RTCVideoTrack?) {
         print("RoomListener: didCloseLocalVideoTrack:", videoTrack ?? "")
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.didCloseLocalVideoTrack()
+        }
     }
     
     func roomClient(roomClient: GCoreRoomClient, didCloseLocalAudioTrack audioTrack: RTCAudioTrack?) {
@@ -183,6 +212,35 @@ extension RoomManager: RoomListener {
     func roomClient(roomClient: GCoreRoomClient, activeSpeakerPeers peers: [String]) {
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.activeSpeakerPeers(peers)
+        }
+    }
+    
+    func roomClient(roomClient: GCoreRoomClient, toggleByModerator kind: String, status: Bool) {
+        guard let kind = StreamType(rawValue: kind) else { return }
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.toggleByModerator(kind: kind, status: status)
+        }
+    }
+    
+    func roomClient(
+        roomClient: GCoreRoomClient,
+        acceptedPermissionsFromModerator fromModerator: Bool,
+        peer: PeerObject,
+        requestType: String
+    ) {
+        guard let kind = StreamType(rawValue: requestType) else { return }
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.acceptedPermission(kind: kind)
+        }
+    }
+    
+    func roomClient(
+        roomClient: GCoreRoomClient,
+        disableProducerByModerator kind: String
+    ) {
+        guard let kind = StreamType(rawValue: kind) else { return }
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.disableByModerator(kind: kind)
         }
     }
 }

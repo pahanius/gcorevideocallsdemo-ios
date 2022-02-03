@@ -14,6 +14,9 @@ class GCLRemoteItem: Hashable {
     var peerId: String {
         peerObject.id
     }
+    var displayName: String? {
+        peerObject.displayName
+    }
     
     init(peerObject: PeerObject, sortId: Int) {
         self.peerObject = peerObject
