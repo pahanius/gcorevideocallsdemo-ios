@@ -9,6 +9,7 @@ class JoinViewController: UIViewController, JoinViewProtocol {
     @IBOutlet private weak var joinButton: UIButton!
     @IBOutlet private weak var videoSwitch: UISwitch!
     @IBOutlet private weak var audioSwitch: UISwitch!
+    @IBOutlet private weak var moderatorSwitch: UISwitch!
     @IBOutlet private weak var currentVideoView: UIView!
     
     private let captureSession = AVCaptureSession()
@@ -44,6 +45,7 @@ class JoinViewController: UIViewController, JoinViewProtocol {
         
         joinOptions.isVideoOn = videoSwitch.isOn
         joinOptions.isAudioOn = audioSwitch.isOn
+        joinOptions.isModerator = moderatorSwitch.isOn
         
         currentVideoView.layer.cornerRadius = 12
         currentVideoView.clipsToBounds = true
@@ -107,6 +109,10 @@ extension JoinViewController {
             audioSwitch.isOn = false
             joinOptions.isAudioOn = false
         }
+    }
+    
+    @IBAction func switchModerator(_ sender: Any) {
+        joinOptions.isModerator = moderatorSwitch.isOn
     }
     
     @IBAction func onJoin(_ sender: Any) {

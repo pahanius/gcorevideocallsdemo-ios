@@ -3,6 +3,7 @@ import UIKit
 import GCoreVideoCallsSDK
 import WebRTC
 import PinLayout
+import AVFoundation
 
 class RoomViewController: UIViewController, RoomViewProtocol {
     
@@ -19,6 +20,8 @@ class RoomViewController: UIViewController, RoomViewProtocol {
     @IBOutlet private weak var showLogButton: UIButton!
     @IBOutlet private weak var loaderView: UIView!
     @IBOutlet private weak var loaderBackView: UIView!
+    @IBOutlet private weak var centerInfoLabel: UILabel!
+    @IBOutlet private weak var moderatorLabel: UILabel!
     
     @IBOutlet private weak var localVideoAspectRationConstraint: NSLayoutConstraint!
     
@@ -27,6 +30,7 @@ class RoomViewController: UIViewController, RoomViewProtocol {
     private let roomManager = RoomManager()
     private var joinOptions: JoinOptions!
     private var remoteItems = Set<GCLRemoteItem>()
+    private var isModerator: Bool = false
     private var peerConnectionsCount = 0
     private var onAnimating: Bool = false {
         didSet {
@@ -48,6 +52,7 @@ class RoomViewController: UIViewController, RoomViewProtocol {
         
         updateRemoteVideoTracksLayouts()
         setRemoteItemsListeners()
+        updateModeratorStatus()
     }
     
     func configure(joinOptions: JoinOptions) {
@@ -80,6 +85,11 @@ class RoomViewController: UIViewController, RoomViewProtocol {
         loggerView.alpha = 0.0
         loaderView.alpha = 0.0
         loaderBackView.layer.cornerRadius = 16
+        
+        centerInfoLabel.text = "Please wait, the meeting host will let you in soon"
+        centerInfoLabel.isHidden = true
+        
+        moderatorLabel.isHidden = true
     }
     
     func initListeners() {
@@ -136,7 +146,10 @@ class RoomViewController: UIViewController, RoomViewProtocol {
                     message: message,
                     preferredStyle: .actionSheet
                 )
-                alert.addAction(UIAlertAction(title: "Turn off mic", style: .default, handler: { action in
+                alert.addAction(UIAlertAction(title: "Remove", style: .destructive, handler: { action in
+                    self.roomManager.removeUserByModerator(peerId: item.peerId)
+                }))
+                alert.addAction(UIAlertAction(title: "Mute mic", style: .default, handler: { action in
                     self.roomManager.disableTrackProducerByModerator(peerId: item.peerId, type: .audio)
                 }))
                 alert.addAction(UIAlertAction(title: "Turn off webcam", style: .default, handler: { action in
@@ -249,6 +262,23 @@ extension RoomViewController {
             right: 0
         )
     }
+    
+    func isWaitingForJoin(_ isWaiting: Bool) {
+        if isWaiting {
+            onAnimating = true
+            centerInfoLabel.isHidden = false
+        } else {
+            onAnimating = false
+            centerInfoLabel.isHidden = true
+        }
+    }
+    
+    func updateModeratorStatus() {
+        moderatorLabel.isHidden = !isModerator
+        remoteItems.forEach { item in
+            item.isShowModeratorControls(isModerator)
+        }
+    }
 }
 
 private
@@ -260,6 +290,10 @@ extension RoomViewController {
 }
 
 extension RoomViewController: RoomManagerDelegate {
+    func clientWaitingForModeratorJoinAccept() {
+        isWaitingForJoin(true)
+    }
+    
     func startConnecting() {
         onAnimating = true
     }
@@ -299,6 +333,8 @@ extension RoomViewController: RoomManagerDelegate {
     }
     
     func joinWithPermissions(_ joinPermissions: JoinPermissionsObject) {
+        isWaitingForJoin(false)
+        
         audioSelectionButtonView.isEnabled = joinPermissions.audio
         videoSelectionButtonView.isEnabled = joinPermissions.video
     }
@@ -335,6 +371,7 @@ extension RoomViewController: RoomManagerDelegate {
     }
     
     func activeSpeakerPeers(_ peers: [String]) {
+        print(peers)
         remoteItems.forEach { item in
             item.isSpeekingActive(peers.contains(item.peerId))
         }
@@ -377,5 +414,62 @@ extension RoomViewController: RoomManagerDelegate {
         DispatchQueue.main.async {
             self.loggerView.append(message)
         }
+    }
+    
+    func moderatorIsAskedToJoin(_ moderatorIsAskedToJoin: ModeratorIsAskedToJoin) {
+        let alert = UIAlertController(
+            title: "Hey!",
+            message: "\(moderatorIsAskedToJoin.userName) wants to come in",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Admin", style: .default, handler: { action in
+            self.roomManager.acceptJoinRequestByModerator(peerId: moderatorIsAskedToJoin.peerId)
+        }))
+        alert.addAction(UIAlertAction(title: "Reject", style: .cancel, handler: { action in
+            self.roomManager.rejectJoinRequestByModerator(peerId: moderatorIsAskedToJoin.peerId)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func requestToModerator(_ requestToModerator: RequestToModerator) {
+        let alert = UIAlertController(
+            title: "Hey!",
+            message: "\(requestToModerator.userName) wants to enable \(requestToModerator.requestType)",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Admin", style: .default, handler: { action in
+            self.roomManager.acceptedPermissionByModerator(
+                peerId: requestToModerator.peerId,
+                type: StreamType(rawValue: requestToModerator.requestType)!
+            )
+        }))
+        alert.addAction(UIAlertAction(title: "Reject", style: .cancel, handler: { action in
+            self.roomManager.rejectPermissionByModerator(
+                peerId: requestToModerator.peerId,
+                type: StreamType(rawValue: requestToModerator.requestType)!
+            )
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func moderatorRejectedJoinRequest() {
+        onClose?()
+    }
+    
+    func updateIsModerator(_ isModerator: Bool) {
+        self.isModerator = isModerator
+        updateModeratorStatus()
+    }
+    
+    func removedByModerator() {
+        onClose?()
+    }
+    
+    func captureSession(_ captureSession: AVCaptureSession) {
+//        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+//        previewLayer.videoGravity = .resizeAspectFill
+//        previewLayer.frame = CGRect(x: 0, y: 300, width: 320, height: 500)
+//
+//        self.view.layer.addSublayer(previewLayer)
     }
 }

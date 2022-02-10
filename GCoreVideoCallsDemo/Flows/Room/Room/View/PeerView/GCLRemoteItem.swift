@@ -46,6 +46,10 @@ class GCLRemoteItem: Hashable {
     func isSpeekingActive(_ isActive: Bool) {
         view.isSpeekingActive(isActive)
     }
+    
+    func isShowModeratorControls(_ isShow: Bool) {
+        view.isShowModeratorControls(isShow)
+    }
 }
 
 extension GCLRemoteItem {

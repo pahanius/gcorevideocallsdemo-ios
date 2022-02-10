@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RoomViewController" customModule="GCoreVideoCallsDemo" customModuleProvider="target">
             <connections>
                 <outlet property="audioSelectionButtonView" destination="zXw-k8-kjm" id="YvD-ag-XJr"/>
+                <outlet property="centerInfoLabel" destination="urA-PP-LIp" id="RfW-qB-YfW"/>
                 <outlet property="closeButton" destination="S8b-vC-jrH" id="Dwe-Xq-IbF"/>
                 <outlet property="loaderBackView" destination="gXa-e3-zki" id="zU2-a5-F6c"/>
                 <outlet property="loaderView" destination="Zfk-cm-9Cj" id="LdS-kQ-HcN"/>
@@ -20,6 +21,7 @@
                 <outlet property="localVideoView" destination="wse-yL-6kd" id="C9U-s1-mOT"/>
                 <outlet property="loggerView" destination="lk9-BZ-fft" id="DfN-rL-PGT"/>
                 <outlet property="mainScrollView" destination="k4r-8g-n9O" id="swv-OJ-HwZ"/>
+                <outlet property="moderatorLabel" destination="r6m-aj-876" id="kXv-pL-PNq"/>
                 <outlet property="roomName" destination="eQG-i1-eCO" id="Vxo-fK-q9c"/>
                 <outlet property="showLogButton" destination="DYv-8n-PIr" id="gMW-J2-2DB"/>
                 <outlet property="switchCameraSelectionButtonView" destination="OVP-V3-VBW" id="c8A-Ty-NCb"/>
@@ -46,6 +48,12 @@
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQc-iN-9nV">
                     <rect key="frame" x="332.5" y="171" width="31" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moderator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6m-aj-876">
+                    <rect key="frame" x="318.5" y="68" width="59" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -151,6 +159,12 @@
                             <rect key="frame" x="156.5" y="397.5" width="101" height="101"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urA-PP-LIp">
+                            <rect key="frame" x="16" y="360" width="382" height="21.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="noz-lh-gpg">
                             <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                             <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -159,8 +173,12 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="noz-lh-gpg" firstAttribute="centerX" secondItem="Zfk-cm-9Cj" secondAttribute="centerX" id="EXg-XC-85v"/>
+                        <constraint firstItem="urA-PP-LIp" firstAttribute="leading" secondItem="Zfk-cm-9Cj" secondAttribute="leading" constant="16" id="Knw-cK-uB4"/>
                         <constraint firstItem="gXa-e3-zki" firstAttribute="leading" secondItem="noz-lh-gpg" secondAttribute="leading" constant="-32" id="PCz-EJ-hST"/>
+                        <constraint firstAttribute="trailing" secondItem="urA-PP-LIp" secondAttribute="trailing" constant="16" id="T2w-As-Un2"/>
+                        <constraint firstItem="urA-PP-LIp" firstAttribute="centerX" secondItem="Zfk-cm-9Cj" secondAttribute="centerX" id="jt0-iO-TRc"/>
                         <constraint firstItem="gXa-e3-zki" firstAttribute="centerY" secondItem="noz-lh-gpg" secondAttribute="centerY" id="ma4-yc-Fgj"/>
+                        <constraint firstItem="gXa-e3-zki" firstAttribute="top" secondItem="urA-PP-LIp" secondAttribute="bottom" constant="16" id="tI2-LY-76z"/>
                         <constraint firstItem="gXa-e3-zki" firstAttribute="centerX" secondItem="noz-lh-gpg" secondAttribute="centerX" id="vUE-yg-CBM"/>
                         <constraint firstItem="gXa-e3-zki" firstAttribute="top" secondItem="noz-lh-gpg" secondAttribute="top" constant="-32" id="w1l-3H-xa3"/>
                         <constraint firstItem="noz-lh-gpg" firstAttribute="centerY" secondItem="Zfk-cm-9Cj" secondAttribute="centerY" id="zGo-N0-1HR"/>
@@ -178,9 +196,11 @@
                 <constraint firstItem="DYv-8n-PIr" firstAttribute="leading" secondItem="S8b-vC-jrH" secondAttribute="leading" id="6zl-yK-bt6"/>
                 <constraint firstItem="Zfk-cm-9Cj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FMK-UZ-jRe"/>
                 <constraint firstItem="eQG-i1-eCO" firstAttribute="leading" secondItem="S8b-vC-jrH" secondAttribute="trailing" constant="16" id="G8q-QM-TT0"/>
+                <constraint firstItem="r6m-aj-876" firstAttribute="centerX" secondItem="wse-yL-6kd" secondAttribute="centerX" id="MQM-9d-K6d"/>
                 <constraint firstItem="QQc-iN-9nV" firstAttribute="centerX" secondItem="wse-yL-6kd" secondAttribute="centerX" id="O0Y-ur-arR"/>
                 <constraint firstItem="k4r-8g-n9O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="O4m-2e-TGh"/>
                 <constraint firstItem="Zfk-cm-9Cj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="PZr-G7-1Rk"/>
+                <constraint firstItem="r6m-aj-876" firstAttribute="top" secondItem="wse-yL-6kd" secondAttribute="top" constant="8" id="Pwa-kG-9pt"/>
                 <constraint firstAttribute="bottom" secondItem="k4r-8g-n9O" secondAttribute="bottom" id="TBJ-FH-St9"/>
                 <constraint firstItem="DYv-8n-PIr" firstAttribute="top" secondItem="S8b-vC-jrH" secondAttribute="bottom" constant="32" id="Ubh-sI-WJT"/>
                 <constraint firstItem="S8b-vC-jrH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="VaL-B5-WlF"/>
@@ -205,7 +225,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

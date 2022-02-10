@@ -29,6 +29,13 @@ protocol RoomManagerDelegate {
     func toggleByModerator(kind: StreamType, status: Bool)
     func acceptedPermission(kind: StreamType)
     func disableByModerator(kind: StreamType)
+    func clientWaitingForModeratorJoinAccept()
+    func moderatorRejectedJoinRequest()
+    func moderatorIsAskedToJoin(_ moderatorIsAskedToJoin: ModeratorIsAskedToJoin)
+    func requestToModerator(_ requestToModerator: RequestToModerator)
+    func updateIsModerator(_ isModerator: Bool)
+    func removedByModerator()
+    func captureSession(_ captureSession: AVCaptureSession)
     
     func logger(_ message: String)
 }
@@ -52,7 +59,8 @@ final class RoomManager {
         let parameters = MeetRoomParametrs(
             roomId: joinOptions.roomId,
             displayName: joinOptions.name,
-            clientHostName: joinOptions.clientHostName
+            clientHostName: joinOptions.clientHostName,
+            isModerator: joinOptions.isModerator
         )
         
         client = GCoreRoomClient(roomOptions: options, requestParameters: parameters, roomListener: self)
@@ -90,13 +98,33 @@ final class RoomManager {
         client?.acceptedPermissionByModerator(peerId: peerId, kind: type.rawValue)
     }
     
+    func rejectPermissionByModerator(peerId: String, type: StreamType) {
+        client?.rejectPermissionByModerator(peerId: peerId, kind: type.rawValue)
+    }
+    
     func disableTrackProducerByModerator(peerId: String, type: StreamType) {
         client?.disableTrackProducerByModerator(peerId: peerId, kind: type.rawValue)
+    }
+    
+    func acceptJoinRequestByModerator(peerId: String) {
+        client?.acceptJoinRequestByModerator(peerId: peerId)
+    }
+    
+    func rejectJoinRequestByModerator(peerId: String) {
+        client?.rejectJoinRequestByModerator(peerId: peerId)
+    }
+    
+    func removeUserByModerator(peerId: String) {
+        client?.removeUserByModerator(peerId: peerId)
     }
 }
 
 // RoomListener
 extension RoomManager: RoomListener {
+    func roomClientWaitingForModeratorJoinAccept() {
+        delegate?.clientWaitingForModeratorJoinAccept()
+    }
+    
     func roomClientStartToConnectWithServices() {
         delegate?.startConnecting()
     }
@@ -242,5 +270,48 @@ extension RoomManager: RoomListener {
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.disableByModerator(kind: kind)
         }
+    }
+    
+    func roomClient(
+        roomClient: GCoreRoomClient,
+        moderatorIsAskedToJoin: ModeratorIsAskedToJoin
+    ) {
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.moderatorIsAskedToJoin(moderatorIsAskedToJoin)
+        }
+    }
+    
+    func roomClientModeratorRejectedJoinRequest() {
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.moderatorRejectedJoinRequest()
+        }
+    }
+    
+    func roomClient(
+        roomClient: GCoreRoomClient,
+        updateMeInfo: UpdateMeInfoObject
+    ) {
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.updateIsModerator(updateMeInfo.role == "moderator")
+        }
+    }
+    
+    func roomClient(
+        roomClient: GCoreRoomClient,
+        requestToModerator: RequestToModerator
+    ) {
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.requestToModerator(requestToModerator)
+        }
+    }
+    
+    func roomClientRemovedByModerator() {
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.removedByModerator()
+        }
+    }
+    
+    func roomClient(roomClient: GCoreRoomClient, captureSession: AVCaptureSession) {
+        delegate?.captureSession(captureSession)
     }
 }

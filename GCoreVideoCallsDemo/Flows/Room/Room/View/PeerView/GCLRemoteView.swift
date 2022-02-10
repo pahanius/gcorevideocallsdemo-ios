@@ -130,6 +130,10 @@ class GCLRemoteView: UIView, GCLRemoteViewOutput {
             self.activeSpeakingView.alpha = isActive ? 1.0 : 0.0
         }
     }
+    
+    func isShowModeratorControls(_ isShow: Bool) {
+        moreButton.isHidden = !isShow
+    }
 }
 
 private
@@ -156,6 +160,7 @@ extension GCLRemoteView {
         
         addSubview(videoImageView)
         addSubview(audioImageView)
+        moreButton.isHidden = true
         addSubview(moreButton)
         
         setNeedsLayout()

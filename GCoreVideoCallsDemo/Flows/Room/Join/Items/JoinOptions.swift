@@ -7,4 +7,5 @@ struct JoinOptions {
     var roomId = ""
     var name = ""
     var clientHostName = ""
+    var isModerator = false
 }

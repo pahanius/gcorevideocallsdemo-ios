@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JoinViewController" customModule="GCoreLabMeetDemo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JoinViewController" customModule="GCoreVideoCallsDemo" customModuleProvider="target">
             <connections>
                 <outlet property="audioSwitch" destination="EeW-Kg-ZBg" id="u4T-nT-2mO"/>
                 <outlet property="clientHostNameField" destination="oxY-EB-oos" id="VRs-hh-cf0"/>
                 <outlet property="currentVideoView" destination="L9U-0Z-vvD" id="5Aj-Ce-3Gj"/>
                 <outlet property="joinButton" destination="LRR-ta-rKE" id="uo1-6h-I54"/>
+                <outlet property="moderatorSwitch" destination="kfn-2F-SM0" id="gYK-Ja-Jnm"/>
                 <outlet property="nameField" destination="JQb-mf-MuM" id="NPe-vj-coI"/>
                 <outlet property="roomIdField" destination="qZu-46-2V3" id="MqI-6j-du2"/>
                 <outlet property="videoSwitch" destination="Sc1-Ce-dBT" id="hlN-F5-ngc"/>
@@ -123,7 +124,7 @@
                             <rect key="frame" x="0.0" y="228" width="382" height="47"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0XT-Gg-hFh">
-                                    <rect key="frame" x="0.0" y="0.0" width="191" height="47"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="127.5" height="47"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6RT-1E-JJ3">
                                             <rect key="frame" x="16" y="13.5" width="44" height="20.5"/>
@@ -149,16 +150,16 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3S-U3-bkU">
-                                    <rect key="frame" x="191" y="0.0" width="191" height="47"/>
+                                    <rect key="frame" x="127.5" y="0.0" width="127" height="47"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ejg-oo-qcq">
-                                            <rect key="frame" x="74.5" y="13.5" width="43.5" height="20.5"/>
+                                            <rect key="frame" x="10.5" y="13.5" width="43.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EeW-Kg-ZBg">
-                                            <rect key="frame" x="126" y="8" width="51" height="31"/>
+                                            <rect key="frame" x="62" y="8" width="51" height="31"/>
                                             <connections>
                                                 <action selector="switchAudio:" destination="-1" eventType="valueChanged" id="9h3-mg-D24"/>
                                             </connections>
@@ -172,6 +173,33 @@
                                         <constraint firstItem="EeW-Kg-ZBg" firstAttribute="centerY" secondItem="J3S-U3-bkU" secondAttribute="centerY" id="aXu-7M-bA8"/>
                                         <constraint firstAttribute="bottom" secondItem="EeW-Kg-ZBg" secondAttribute="bottom" constant="8" id="bdY-zp-OZx"/>
                                         <constraint firstItem="EeW-Kg-ZBg" firstAttribute="top" secondItem="J3S-U3-bkU" secondAttribute="top" constant="8" id="jYu-mF-yuf"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qag-iy-l8K">
+                                    <rect key="frame" x="254.5" y="0.0" width="127.5" height="47"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxn-o4-1t0">
+                                            <rect key="frame" x="5" y="13.5" width="49.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kfn-2F-SM0">
+                                            <rect key="frame" x="62.5" y="8" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="switchAudio:" destination="-1" eventType="valueChanged" id="ale-vr-63t"/>
+                                                <action selector="switchModerator:" destination="-1" eventType="valueChanged" id="0LQ-Yr-HhL"/>
+                                            </connections>
+                                        </switch>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="kfn-2F-SM0" secondAttribute="trailing" constant="16" id="0tB-sr-Fe0"/>
+                                        <constraint firstItem="Lxn-o4-1t0" firstAttribute="centerY" secondItem="kfn-2F-SM0" secondAttribute="centerY" id="EdB-Ok-H0L"/>
+                                        <constraint firstItem="kfn-2F-SM0" firstAttribute="top" secondItem="qag-iy-l8K" secondAttribute="top" constant="8" id="Ewa-tf-lgT"/>
+                                        <constraint firstAttribute="bottom" secondItem="kfn-2F-SM0" secondAttribute="bottom" constant="8" id="K2q-x5-AQf"/>
+                                        <constraint firstItem="kfn-2F-SM0" firstAttribute="centerY" secondItem="qag-iy-l8K" secondAttribute="centerY" id="i4W-a8-tLt"/>
+                                        <constraint firstItem="kfn-2F-SM0" firstAttribute="leading" secondItem="Lxn-o4-1t0" secondAttribute="trailing" constant="8" id="wc6-c4-tMx"/>
                                     </constraints>
                                 </view>
                             </subviews>

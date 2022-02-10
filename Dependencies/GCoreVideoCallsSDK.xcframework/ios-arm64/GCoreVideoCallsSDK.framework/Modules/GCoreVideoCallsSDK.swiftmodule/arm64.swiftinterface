@@ -244,6 +244,13 @@ public protocol RoomListener {
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, toggleByModerator kind: Swift.String, status: Swift.Bool)
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, acceptedPermissionsFromModerator fromModerator: Swift.Bool, peer: GCoreVideoCallsSDK.PeerObject, requestType: Swift.String)
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, disableProducerByModerator kind: Swift.String)
+  func roomClientWaitingForModeratorJoinAccept()
+  func roomClientModeratorRejectedJoinRequest()
+  func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, moderatorIsAskedToJoin: GCoreVideoCallsSDK.ModeratorIsAskedToJoin)
+  func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, updateMeInfo: GCoreVideoCallsSDK.UpdateMeInfoObject)
+  func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, requestToModerator: GCoreVideoCallsSDK.RequestToModerator)
+  func roomClientRemovedByModerator()
+  func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, captureSession: AVFoundation.AVCaptureSession)
 }
 public enum MediaError : Swift.Error {
   case CAMERA_DEVICE_NOT_FOUND
@@ -337,6 +344,13 @@ extension GCoreVideoCallsSDK.FoundationSecurity : GCoreVideoCallsSDK.Certificate
 }
 extension GCoreVideoCallsSDK.FoundationSecurity : GCoreVideoCallsSDK.HeaderValidator {
   public func validate(headers: [Swift.String : Swift.String], key: Swift.String) -> Swift.Error?
+}
+final public class RequestToModerator : Swift.Decodable {
+  final public let peerId: Swift.String
+  final public let userName: Swift.String
+  final public let requestType: Swift.String
+  @objc deinit
+  public init(from decoder: Swift.Decoder) throws
 }
 public class WSCompression : GCoreVideoCallsSDK.CompressionHandler {
   public init()
@@ -738,7 +752,7 @@ extension GCoreVideoCallsSDK.JSON : Swift.Codable {
 }
 public struct MeetRoomParametrs : Swift.Decodable {
   public var customParameters: [Swift.String : Swift.String]
-  public init(roomId: Swift.String, displayName: Swift.String, peerId: Swift.String? = nil, clientHostName: Swift.String? = nil)
+  public init(roomId: Swift.String, displayName: Swift.String, peerId: Swift.String? = nil, clientHostName: Swift.String? = nil, isModerator: Swift.Bool)
   public var parameters: [Swift.String : Swift.String] {
     get
   }
@@ -763,10 +777,14 @@ final public class GCoreRoomClient {
   final public func toggleCameraPosition(completion: ((Swift.Error?) -> Swift.Void)?)
   final public func askModeratorToEnableTrack(kind: Swift.String)
   final public func acceptedPermissionByModerator(peerId: Swift.String, kind: Swift.String)
+  final public func rejectPermissionByModerator(peerId: Swift.String, kind: Swift.String)
   final public func disableTrackProducerByModerator(peerId: Swift.String, kind: Swift.String)
   final public func open() throws
   final public func close()
   final public func audioSessionActivate()
+  final public func acceptJoinRequestByModerator(peerId: Swift.String)
+  final public func rejectJoinRequestByModerator(peerId: Swift.String)
+  final public func removeUserByModerator(peerId: Swift.String)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class FoundationHTTPServerHandler : GCoreVideoCallsSDK.HTTPServerHandler {
@@ -787,6 +805,12 @@ public class NativeEngine : ObjectiveC.NSObject, GCoreVideoCallsSDK.Engine, Foun
   @objc public func urlSession(_ session: Foundation.URLSession, webSocketTask: Foundation.URLSessionWebSocketTask, didCloseWith closeCode: Foundation.URLSessionWebSocketTask.CloseCode, reason: Foundation.Data?)
   @objc override dynamic public init()
   @objc deinit
+}
+final public class ModeratorIsAskedToJoin : Swift.Decodable {
+  final public let peerId: Swift.String
+  final public let userName: Swift.String
+  @objc deinit
+  public init(from decoder: Swift.Decoder) throws
 }
 public class FoundationHTTPHandler : GCoreVideoCallsSDK.HTTPHandler {
   public init()
@@ -820,6 +844,16 @@ public enum ServerEvent {
 }
 public protocol Server {
   func start(address: Swift.String, port: Swift.UInt16) -> Swift.Error?
+}
+final public class UpdateMeInfoObject : Swift.Decodable {
+  final public let peerId: Swift.String
+  final public let role: Swift.String
+  final public let displayName: Swift.String
+  final public let itisparticipant: Swift.Bool
+  final public let canRecord: Swift.Bool
+  final public let waitingRoom: Swift.Bool
+  @objc deinit
+  public init(from decoder: Swift.Decoder) throws
 }
 public class WSEngine : GCoreVideoCallsSDK.Engine, GCoreVideoCallsSDK.TransportEventClient, GCoreVideoCallsSDK.FramerEventClient, GCoreVideoCallsSDK.FrameCollectorDelegate, GCoreVideoCallsSDK.HTTPHandlerDelegate {
   public var respondToPingWithPong: Swift.Bool

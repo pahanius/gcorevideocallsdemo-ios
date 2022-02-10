@@ -5,6 +5,9 @@
       location = "group:GCoreVideoCallsDemo.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:../GCoreVideoCallsSDK/GCoreVideoCallsSDK.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
