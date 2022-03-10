@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
+// swift-compiler-version: Apple Swift version 5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)
 // swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name GCoreVideoCallsSDK
 import AVFoundation
 import CommonCrypto
@@ -250,7 +250,7 @@ public protocol RoomListener {
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, updateMeInfo: GCoreVideoCallsSDK.UpdateMeInfoObject)
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, requestToModerator: GCoreVideoCallsSDK.RequestToModerator)
   func roomClientRemovedByModerator()
-  func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, captureSession: AVFoundation.AVCaptureSession)
+  func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, captureSession: AVFoundation.AVCaptureSession, captureDevice: AVFoundation.AVCaptureDevice)
 }
 public enum MediaError : Swift.Error {
   case CAMERA_DEVICE_NOT_FOUND

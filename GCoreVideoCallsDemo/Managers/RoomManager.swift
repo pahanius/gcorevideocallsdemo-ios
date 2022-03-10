@@ -121,6 +121,10 @@ final class RoomManager {
 
 // RoomListener
 extension RoomManager: RoomListener {
+    func roomClient(roomClient: GCoreRoomClient, captureSession: AVCaptureSession, captureDevice: AVCaptureDevice) {
+        
+    }
+    
     func roomClientWaitingForModeratorJoinAccept() {
         delegate?.clientWaitingForModeratorJoinAccept()
     }
