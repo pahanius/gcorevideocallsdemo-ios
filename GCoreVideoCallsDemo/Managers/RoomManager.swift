@@ -256,7 +256,7 @@ extension RoomManager: RoomListener {
     
     func roomClient(
         roomClient: GCoreRoomClient,
-        acceptedPermissionsFromModerator fromModerator: Bool,
+        acceptedPermissionFromModerator fromModerator: Bool,
         peer: PeerObject,
         requestType: String
     ) {

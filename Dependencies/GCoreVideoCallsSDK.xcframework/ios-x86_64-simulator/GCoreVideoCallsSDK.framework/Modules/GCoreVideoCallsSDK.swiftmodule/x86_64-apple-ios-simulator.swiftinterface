@@ -242,7 +242,7 @@ public protocol RoomListener {
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, didCloseRemoteAudioByModerator byModerator: Swift.Bool, audioObject: GCoreVideoCallsSDK.AudioObject)
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, activeSpeakerPeers peers: [Swift.String])
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, toggleByModerator kind: Swift.String, status: Swift.Bool)
-  func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, acceptedPermissionsFromModerator fromModerator: Swift.Bool, peer: GCoreVideoCallsSDK.PeerObject, requestType: Swift.String)
+  func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, acceptedPermissionFromModerator fromModerator: Swift.Bool, peer: GCoreVideoCallsSDK.PeerObject, requestType: Swift.String)
   func roomClient(roomClient: GCoreVideoCallsSDK.GCoreRoomClient, disableProducerByModerator kind: Swift.String)
   func roomClientWaitingForModeratorJoinAccept()
   func roomClientModeratorRejectedJoinRequest()

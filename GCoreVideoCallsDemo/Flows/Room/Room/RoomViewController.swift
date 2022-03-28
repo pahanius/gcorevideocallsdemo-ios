@@ -392,8 +392,31 @@ extension RoomViewController: RoomManagerDelegate {
         switch kind {
         case .audio:
             audioSelectionButtonView.isEnabled = true
+            let alert = UIAlertController(
+                title: "Request from moderator",
+                message: "Enable mic?",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                self.audioSelectionButtonView.isOn = true
+                self.roomManager.toggleAudio(isOn: true)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
+            self.present(alert, animated: true, completion: nil)
         case .video:
             videoSelectionButtonView.isEnabled = true
+            videoSelectionButtonView.isEnabled = true
+            let alert = UIAlertController(
+                title: "Request from moderator",
+                message: "Enable video?",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                self.videoSelectionButtonView.isOn = true
+                self.roomManager.toggleVideo(isOn: true)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
+            self.present(alert, animated: true, completion: nil)
         case .share:
             break
         }
