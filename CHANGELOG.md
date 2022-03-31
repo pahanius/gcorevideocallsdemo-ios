@@ -13,6 +13,27 @@
 <!-- ### Changed -->
 <!-- ### Fixed -->
 
+<!-- ---
+<br><br> -->
+
+## [2.4] - 2022-03-31
+
+## SDK
+
+---
+
+- SDK собрано в XCode **13.3 (13E113)**
+
+## Demo приложение
+
+---
+
+### Added
+
+- Добавлены методы для работы с модератором (RoomListener), см. описание в [README.md](https://github.com/pahanius/gcorevideocallsdemo-ios#readme)
+
+---
+<br><br>
 ## [2.3] - 2022-01-13
 
 ## SDK
@@ -53,6 +74,8 @@
 
 - Библиотека GCoreVideoCallsSDK замена на GCoreVideoCallsSDK.xcframework
 
+---
+<br><br>
 ## [2.2] - 2021-12-28
 
 ## SDK
@@ -64,7 +87,7 @@
 - Xcode 13 compatible
  
 ---
-
+<br><br>
 ## [2.1] - 2021-08-19
 
 ## SDK

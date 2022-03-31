@@ -99,7 +99,6 @@
 		3513FD7926BA805900A6F398 /* GCoreVideoCallsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GCoreVideoCallsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3578DEA626CD2D0F00C7D354 /* LoggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerView.swift; sourceTree = "<group>"; };
 		35D8D1A027B5142A00927798 /* GCoreVideoCallsSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GCoreVideoCallsSDK.xcframework; sourceTree = "<group>"; };
-		506B48024455175DFE82C285 /* Pods-GCoreLabMeetDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GCoreLabMeetDemo.debug.xcconfig"; path = "Target Support Files/Pods-GCoreLabMeetDemo/Pods-GCoreLabMeetDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		51BA95702500D81600F11DFD /* GCoreVideoCallsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GCoreVideoCallsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BA95732500D81600F11DFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51BA957A2500D81600F11DFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -108,7 +107,6 @@
 		51BA95812500D81700F11DFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80264AE60E71A884FF3DA4ED /* Pods_GCoreVideoCallsDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GCoreVideoCallsDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80C0A0798ABDE35B5443DE1F /* Pods-GCoreVideoCallsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GCoreVideoCallsDemo.release.xcconfig"; path = "Target Support Files/Pods-GCoreVideoCallsDemo/Pods-GCoreVideoCallsDemo.release.xcconfig"; sourceTree = "<group>"; };
-		9F9BA2A83726768AB3A4336B /* Pods-GCoreLabMeetDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GCoreLabMeetDemo.release.xcconfig"; path = "Target Support Files/Pods-GCoreLabMeetDemo/Pods-GCoreLabMeetDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -376,8 +374,6 @@
 		DB2030DCD2AAE14EFA260029 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				506B48024455175DFE82C285 /* Pods-GCoreLabMeetDemo.debug.xcconfig */,
-				9F9BA2A83726768AB3A4336B /* Pods-GCoreLabMeetDemo.release.xcconfig */,
 				175FAEE08CE4AF317C19AEF7 /* Pods-GCoreVideoCallsDemo.debug.xcconfig */,
 				80C0A0798ABDE35B5443DE1F /* Pods-GCoreVideoCallsDemo.release.xcconfig */,
 			);

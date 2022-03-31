@@ -144,7 +144,81 @@
      - parameter peers массив Id у которых активен микрофон
      */
     func roomClient(roomClient: GCoreRoomClient, activeSpeakerPeers peers: [String])
-    ```
+
+   /**
+    отключение/включение модератором  камеры/микрофона/шаринга экрана
+    разрешение на вкл
+    - parameter kind: тип выключаемого потока(video, audio, share)
+    - parameter status: выключить или включить
+    */
+   func roomClient(
+       roomClient: GCoreRoomClient,
+       toggleByModerator kind: String,
+       status: Bool
+   )
+
+   /**
+    Разрешение от модератора на включение камеры/микрофона/шаринга
+    - parameter fromModerator: запрос от модератора
+    - parameter peer: для какого объекта изменить разрешение
+    - parameter requestType: тип потока audio/video/share
+    */
+   func roomClient(
+       roomClient: GCoreRoomClient,
+       acceptedPermissionFromModerator fromModerator: Bool,
+       peer: PeerObject,
+       requestType: String
+   )
+
+   /**
+    Разрешение от модератора на выключение камеры/микрофона/шаринга
+    - parameter kind: тип выключаемого потока audio/video/share
+    */
+   func roomClient(
+       roomClient: GCoreRoomClient,
+       disableProducerByModerator kind: String
+   )
+
+   /// Ждём от модератора разрешение на вход в комнату
+   func roomClientWaitingForModeratorJoinAccept()
+
+   /// Модератор отклонил вход в комнату
+   func roomClientModeratorRejectedJoinRequest()
+
+   /// Метод для модератора. Вызывается, когда Пир хочет войти в комнату
+   /// - Parameters:
+   ///   - moderatorIsAskedToJoin: модель Пира, который хочет войти в комнату
+   func roomClient(
+       roomClient: GCoreRoomClient,
+       moderatorIsAskedToJoin: ModeratorIsAskedToJoin
+   )
+
+   /// Обновление информации о текущем юзере и комнате
+   /// - Parameters:
+   ///   - updateMeInfo: модель с обновлённой информацией о текущем юзере и комнате
+   func roomClient(
+       roomClient: GCoreRoomClient,
+       updateMeInfo: UpdateMeInfoObject
+   )
+
+   /// Запрос модератору на включение чего либо
+   /// - Parameters:
+   ///   - requestToModerator: модель с типом запроса
+   func roomClient(
+       roomClient: GCoreRoomClient,
+       requestToModerator: RequestToModerator
+   )
+
+   /// Вас удалил модератор из комнаты
+   func roomClientRemovedByModerator()
+
+   /// Текущие сессия и девайс, которые использует SDK
+   func roomClient(
+       roomClient: GCoreRoomClient,
+       captureSession: AVCaptureSession,
+       captureDevice: AVCaptureDevice
+   )
+	```
     
 8. Рекомендуемые надстройки после успешного подключения
 
